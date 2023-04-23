@@ -20,11 +20,11 @@ llvm::Value* ASTExpressionDivision::Compile(llvm::IRBuilder<>& builder, ASTFunct
     // Compile the values as needed. Remember, we can only do operations on R-Values.
     auto retType = ReturnType(func);
     if (retType->Equals(&VarTypeSimple::IntType)) // Do standard addition on integer operands since we return an int.
-        return builder.CreateAdd(a1->CompileRValue(builder, func), a2->CompileRValue(builder, func));
+        return builder.CreateSDiv(a1->CompileRValue(builder, func), a2->CompileRValue(builder, func));
     else if (retType->Equals(&VarTypeSimple::FloatType)) // Do addition on floating point operands since we return a float.
-        return builder.CreateFAdd(a1->CompileRValue(builder, func), a2->CompileRValue(builder, func));
+        return builder.CreateFDiv(a1->CompileRValue(builder, func), a2->CompileRValue(builder, func));
     else // Call to return type should make this impossible, but best to keep it here just in case of a bug.
-        throw std::runtime_error("ERROR: Can not perform addition! Are both inputs either ints or floats?");
+        throw std::runtime_error("ERROR: Can not perform division! Are both inputs either ints or floats?");
 }
 
 std::string ASTExpressionDivision::ToString(const std::string& prefix)

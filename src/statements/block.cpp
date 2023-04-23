@@ -1,7 +1,13 @@
 #include "block.h"
 
+#include "../function.h"
 #include "../types/simple.h"
 
+#include <iostream>
+
+
+//PROBLEM IDENTIFIED 
+//AN EMPTY STATEMENT IS BEING PUSHED TO THE END FOR SOME REASON. SEGFAULT WHEN ACCESSED.
 std::unique_ptr<VarType> ASTStatementBlock::StatementReturnType(ASTFunction& func)
 {
 
@@ -10,8 +16,10 @@ std::unique_ptr<VarType> ASTStatementBlock::StatementReturnType(ASTFunction& fun
     // Otherwise, we return nothing since we made it to the end.
 
     // Go through each statement.
-    for (auto& statement : statements)
+
+    for (int i = 0; i < statements.size(); i++)
     {
+        auto& statement = statements[i];
         auto ret = statement->StatementReturnType(func);
         if (ret) return std::move(ret);
     }

@@ -8,10 +8,10 @@ class ASTStatementFor : public ASTStatement
     std::unique_ptr<ASTExpression> init;
     std::unique_ptr<ASTExpression> condition;
     std::unique_ptr<ASTExpression> inc;
-    std::unique_ptr<ASTExpression> stmt;
+    std::unique_ptr<ASTStatement> stmt;
 
 public:
-    ASTStatementFor(std::unique_ptr<ASTExpression> init, std::unique_ptr<ASTExpression> condition, std::unique_ptr<ASTExpression> inc, std::unique_ptr<ASTExpression> stmt)
+    ASTStatementFor(std::unique_ptr<ASTExpression> init, std::unique_ptr<ASTExpression> condition, std::unique_ptr<ASTExpression> inc, std::unique_ptr<ASTStatement> stmt)
     : init(std::move(init)), condition(std::move(condition)), inc(std::move(inc)), stmt(std::move(stmt)) {}
 
     static auto Create(std::unique_ptr<ASTExpression> init, std::unique_ptr<ASTExpression> condition, std::unique_ptr<ASTExpression> inc, std::unique_ptr<ASTExpression> stmt)

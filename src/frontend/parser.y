@@ -63,7 +63,7 @@ extern FILE *yyin;
   ASTExpressionComparisonType rel;
 }
 
-%token ID BOOL_TYPE INT_TYPE FLOAT_TYPE STRING_TYPE VOID_TYPE SEMICOLON LPAREN RPAREN COMMA LBRACE RBRACE IF ELSE WHILE BREAK RETURN EQUALS_SIGN LOGICAL_OR LOGICAL_AND LOGICAL_NOT RELOP_GT RELOP_LT RELOP_GE RELOP_LE RELOP_EQ RELOP_NE ARITH_PLUS ARITH_MINUS ARITH_MULT ARITH_DIV ARITH_MOD VARIADIC BOOL_LITERAL INT_LITERAL FLOAT_LITERAL STRING_LITERAL EOL
+%token FOR ID BOOL_TYPE INT_TYPE FLOAT_TYPE STRING_TYPE VOID_TYPE SEMICOLON LPAREN RPAREN COMMA LBRACE RBRACE IF ELSE WHILE BREAK RETURN EQUALS_SIGN LOGICAL_OR LOGICAL_AND LOGICAL_NOT RELOP_GT RELOP_LT RELOP_GE RELOP_LE RELOP_EQ RELOP_NE ARITH_PLUS ARITH_MINUS ARITH_MULT ARITH_DIV ARITH_MOD VARIADIC BOOL_LITERAL INT_LITERAL FLOAT_LITERAL STRING_LITERAL EOL
 
 %type <boolval> BOOL_LITERAL
 %type <strval> ID STRING_LITERAL
@@ -82,20 +82,20 @@ extern FILE *yyin;
 
 %%
  //AST does not support global variables, so the only declarations are functions
-program: | decList ;
+program: | decList;
 decList: decList dec | dec ;
 dec: funDef | funDec ;
 
 type: BOOL_TYPE {
   $$ = new VarTypeSimple(VarTypeSimple::BoolType);
  }| INT_TYPE {
-  /* fill in */
+  $$ = new VarTypeSimple(VarTypeSimple::IntType);
  }| FLOAT_TYPE {
-  /* fill in */
+  $$ = new VarTypeSimple(VarTypeSimple::FloatType);
  }| STRING_TYPE {
-  /* fill in */
+  $$ = new VarTypeSimple(VarTypeSimple::StringType);
  } | VOID_TYPE {
-  /* fill in */
+  $$ = new VarTypeSimple(VarTypeSimple::VoidType);
  };
 varDec: type ID {
   //ASTFunctionParameter is just a tuple of a unique pointer to a type and a string (see definition in function.h)
@@ -123,6 +123,28 @@ funDec: type ID LPAREN params RPAREN SEMICOLON {
 };
 
 funDef: type ID LPAREN params RPAREN LBRACE varDecs stmts RBRACE {
+  auto statements = std::make_unique<ASTStatementBlock>();
+  for (auto s : *$8) {
+    auto ptr = std::unique_ptr<ASTStatement>(s);
+    statements->statements.push_back(std::move(ptr));
+  }
+  auto parameters = ASTFunctionParameters();
+  bool variadic = false;
+  for(auto p : *$4) {
+    /* The AST uses unique pointers for memory purposes, but bison doesn't work well with those, so the parser uses plain C-style pointers.
+     * To account for this, make sure to dereference the pointers before using. */
+    if (p) parameters.push_back(std::move(*p));
+    else variadic = true;
+  }
+  auto f = ast.AddFunction($2, std::unique_ptr<VarType>($1), std::move(parameters), variadic);
+  for (auto v : *$7) {
+    f->AddStackVar(std::move(*v));
+  }
+  f->Define(std::move(statements));
+
+
+
+
   /* Fill in this block. (This will be the largest one)
    * You can follow these steps to create the function and assign its behavior correctly:
    * - First, change the vector "stmts" into an ASTStatementBlock (this will need to be a unique pointer).
@@ -165,14 +187,14 @@ stmts: stmts stmt {
 selStmt: IF LPAREN expr RPAREN stmt {
   $$ = new ASTStatementIf(std::unique_ptr<ASTExpression>($3), std::unique_ptr<ASTStatement>($5), std::unique_ptr<ASTStatement>(nullptr));
  } | IF LPAREN expr RPAREN stmt ELSE stmt {
-  /* fill in */
+  $$ = new ASTStatementIf(std::unique_ptr<ASTExpression>($3), std::unique_ptr<ASTStatement>($5), std::unique_ptr<ASTStatement>($7));
  };
 
 iterStmt: WHILE LPAREN expr RPAREN stmt {
-  /* fill in */
+  $$ = new ASTStatementWhile(std::unique_ptr<ASTExpression>($3), std::unique_ptr<ASTStatement>($5));
+ } | FOR LPAREN expr SEMICOLON expr SEMICOLON expr SEMICOLON RPAREN stmt {
+  //$$ = new ASTStatementFor(std::unique_ptr<ASTExpression>($3), std::unique_ptr<ASTExpression>($5), std::unique_ptr<ASTExpression>($7), std::unique_ptr<ASTStatement>($10));
  };
-
-/* fill in grammar and code action for for-loops */
 
 
 jumpStmt: RETURN SEMICOLON {
@@ -180,17 +202,19 @@ jumpStmt: RETURN SEMICOLON {
   retStmt->returnExpression = std::unique_ptr<ASTExpression>(nullptr);
   $$ = retStmt;
  }| RETURN expr SEMICOLON {
-  /* fill in */
+  auto retStmt = new ASTStatementReturn();
+  retStmt->returnExpression = std::unique_ptr<ASTExpression>($2);
  }; /* There should also be break statements here, but they are not implemented in the AST */
 
 expr: orExpr { $$ = $1;} | ID EQUALS_SIGN expr {
-  /* fill in (create an ASTExpressionAssignment) */
+  auto var = new ASTExpressionVariable($1);
+  $$ = new ASTExpressionAssignment(std::unique_ptr<ASTExpression>(var), std::unique_ptr<ASTExpression>($3));
  };
 orExpr: andExpr {$$ = $1;} | orExpr LOGICAL_OR andExpr {
   $$ = new ASTExpressionOr(std::unique_ptr<ASTExpression>($1), std::unique_ptr<ASTExpression>($3));
  };
 andExpr: unaryRelExpr {$$ = $1;} | andExpr LOGICAL_AND unaryRelExpr {
-  /* fill in */
+  $$ = new ASTExpressionAnd(std::unique_ptr<ASTExpression>($1), std::unique_ptr<ASTExpression>($3));
  };
 unaryRelExpr: LOGICAL_NOT unaryRelExpr {
   //logical not isn't implmented in ast, so we just don't do anything
@@ -283,6 +307,7 @@ int main(int argc, char **argv) {
     {
       i++;
       outFile = argv[i];
+      //printf(arg[i]);
     }
     else if (arg == "-nPrint")
     {
@@ -324,7 +349,7 @@ int main(int argc, char **argv) {
     printf("-fAst           Output format is an abstract syntax tree.\n");
     printf("-fBc            Output format is in LLVM bitcode.\n");
     printf("-fObj           Output format is an object file.\n");
-    return 1;
+    //return 1;
   }
 
   // Fetch input.
@@ -345,8 +370,13 @@ int main(int argc, char **argv) {
     fclose(yyin);
   }
 
+
   // Do the compilation.
   ast.Compile();
+  std::cout << "here" << std::endl;
+  ast.WriteLLVMAssemblyToFile(outFile);
+  ast.WriteLLVMBitcodeToFile(outFile);
+
 
   // Print AST if needed.
   if (printAST) std::cout << ast.ToString() << std::endl;
@@ -362,6 +392,7 @@ int main(int argc, char **argv) {
   }
   else if (outputFormat == 2)
   {
+    std::cout << "here" << std::endl;
     std::cout << "OBJ exporting not supported yet." << std::endl;
   }
   else

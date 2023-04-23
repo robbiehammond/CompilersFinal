@@ -7,7 +7,7 @@ std::unique_ptr<VarType> ASTExpressionInt2Bool::ReturnType(ASTFunction& func)
 
 bool ASTExpressionInt2Bool::IsLValue(ASTFunction& func)
 {
-    return false; // Even if converting a variable we need to load from it first to convert its raw value into a bool.
+    return false; 
 }
 
 llvm::Value* ASTExpressionInt2Bool::Compile(llvm::IRBuilder<>& builder, ASTFunction& func)
@@ -15,9 +15,11 @@ llvm::Value* ASTExpressionInt2Bool::Compile(llvm::IRBuilder<>& builder, ASTFunct
     // Make sure operand is valid int type.
     if (!operand->ReturnType(func)->Equals(&VarTypeSimple::IntType))
         throw std::runtime_error("ERROR: Expected integer operand in int2bool but got another type instead!");
+    
 
     // Finally compile the cast, we must use an R-Value to cast (we can't just use a raw variable).
     // Wow, some return thing is missing here!
+    return builder.CreateSIToFP(operand->CompileRValue(builder, func), VarTypeSimple::BoolType.GetLLVMType(builder.getContext()));
 }
 
 std::string ASTExpressionInt2Bool::ToString(const std::string& prefix)

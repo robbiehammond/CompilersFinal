@@ -36,31 +36,37 @@ void ASTStatementFor::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, AST
 
     // Create the basic blocks.
     auto* funcVal = (llvm::Function*)func.GetVariableValue(func.name);
-    auto whileLoop = llvm::BasicBlock::Create(builder.getContext(), "forLoop", funcVal);
-    auto whileLoopBody = llvm::BasicBlock::Create(builder.getContext(), "forLoopBody", funcVal);
-    auto whileLoopEnd = llvm::BasicBlock::Create(builder.getContext(), "forLoopEnd", funcVal);
+
+    auto forLoop = llvm::BasicBlock::Create(builder.getContext(), "forLoop", funcVal);
+    auto forLoopBody = llvm::BasicBlock::Create(builder.getContext(), "forLoopBody", funcVal);
+    auto forLoopEnd = llvm::BasicBlock::Create(builder.getContext(), "forLoopEnd", funcVal);
+
+
 
     // Jump to the while loop.
-    builder.CreateBr(whileLoop);
+    builder.CreateBr(forLoop);
 
     // Compile condition and jump to the right block.
-    builder.SetInsertPoint(whileLoop);
+    builder.SetInsertPoint(forLoop);
+    init->Compile(mod, builder, func);
     auto conditionVal = condition->CompileRValue(builder, func);
-    builder.CreateCondBr(conditionVal, whileLoopBody, whileLoopEnd);
+    builder.CreateCondBr(conditionVal, forLoopBody, forLoopEnd);
 
     // Compile the body. Note that we need to not create a jump if there is a return.
-    builder.SetInsertPoint(whileLoopBody);
+    builder.SetInsertPoint(forLoopBody);
     stmt->Compile(mod, builder, func);
-    if (!stmt->StatementReturnType(func)) builder.CreateBr(whileLoop);
+    inc->Compile(mod, builder, func);
+    if (!stmt->StatementReturnType(func)) builder.CreateBr(forLoop);
+
 
     // Continue from the end of the created while loop.
-    builder.SetInsertPoint(whileLoopEnd);
+    builder.SetInsertPoint(forLoopEnd);
 
 }
 
 std::string ASTStatementFor::ToString(const std::string& prefix)
 {
-    std::string output = "while\n";
+    std::string output = "for\n";
     output += prefix + "├──" + condition->ToString(prefix + "│  ");
     output += prefix + "└──" + stmt->ToString(prefix + "   ");
     return output;

@@ -1,9 +1,11 @@
 #include "function.h"
 
+#include <iostream>
+
 #include "ast.h"
 #include "types/simple.h"
 #include <llvm/IR/Verifier.h>
-
+#include "statements/return.h"
 ASTFunction::ASTFunction(AST& ast, const std::string& name, std::unique_ptr<VarType> returnType, ASTFunctionParameters parameters, bool variadic) : ast(ast), name(name)
 {
 
@@ -135,7 +137,7 @@ void ASTFunction::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder)
     }
 
     // Check the function body to make sure it returns what we expect it to.
-    std::unique_ptr<VarType> retType = definition->StatementReturnType(*this);
+    std::unique_ptr<VarType> retType = definition->StatementReturnType(*this); //segfault at this line!
     bool satisfiesType = !retType && funcType->returnType->Equals(&VarTypeSimple::VoidType); // If we return nothing and expect void, it works.
     if (!satisfiesType && retType) satisfiesType = retType->Equals(funcType->returnType.get()); // If we return something, make sure we return what is expected.
     if (!satisfiesType)

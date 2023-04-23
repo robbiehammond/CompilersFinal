@@ -1,5 +1,5 @@
 #include "return.h"
-
+#include <iostream>
 #include "../types/simple.h"
 
 std::unique_ptr<VarType> ASTStatementReturn::StatementReturnType(ASTFunction& func)

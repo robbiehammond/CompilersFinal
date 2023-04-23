@@ -1,6 +1,7 @@
 #include "ast.h"
 
 #include <iostream>
+
 #include <llvm/Bitcode/BitcodeWriter.h>
 
 //#include <llvm/Transforms/InstCombine/InstCombine.h> // This causes an error on my machine.
@@ -10,8 +11,6 @@
 
 AST::AST(const std::string modName) : module(modName, context), builder(context), fpm(&module)
 {
-
-    // This requires the above includes that don't work on my machine, so I can't really add these default optimizations.
 
     // Promote allocas to registers.
     fpm.add(llvm::createPromoteMemoryToRegisterPass());
@@ -90,6 +89,7 @@ void AST::WriteLLVMAssemblyToFile(const std::string& outFile)
     llvm::raw_fd_ostream outLl(outFile, err);
     module.print(outLl, nullptr);
     outLl.close();
+
 }
 
 void AST::WriteLLVMBitcodeToFile(const std::string& outFile)
@@ -97,7 +97,8 @@ void AST::WriteLLVMBitcodeToFile(const std::string& outFile)
     if (!compiled) throw std::runtime_error("ERROR: Module " + std::string(module.getName().data()) + " not compiled!");
     if (outFile == "") throw std::runtime_error("ERROR: Writing bitcode to standard out is not supported!");
     std::error_code err;
-    llvm::raw_fd_ostream outBc(outFile, err);
+    llvm::raw_fd_ostream outBc("testMod.bc", err);
     llvm::WriteBitcodeToFile(module, outBc);
     outBc.close();
+
 }

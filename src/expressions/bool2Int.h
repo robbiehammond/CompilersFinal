@@ -18,4 +18,3 @@ public:
     llvm::Value* Compile(llvm::IRBuilder<>& builder, ASTFunction& func) override;
     std::string ToString(const std::string& prefix) override;
 };
-// Whoops! Looks like someone removed the declarations...

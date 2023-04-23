@@ -11,7 +11,12 @@ bool ASTExpressionNegation::IsLValue(ASTFunction& func)
 
 llvm::Value* ASTExpressionNegation::Compile(llvm::IRBuilder<>& builder, ASTFunction& func)
 {
-    return nullptr;
+    auto retType = ReturnType(func);
+    if (retType->Equals(&VarTypeSimple::IntType) || retType->Equals(&VarTypeSimple::FloatType) || retType->Equals(&VarTypeSimple::BoolType))
+        return builder.CreateNeg(a1->CompileRValue(builder, func));
+    else 
+        throw std::runtime_error("ERROR: cannot perform negation! Is the input an int, float, or bool?");
+
 }
 
 std::string ASTExpressionNegation::ToString(const std::string& prefix)
