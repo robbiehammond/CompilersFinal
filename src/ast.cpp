@@ -12,6 +12,14 @@
 AST::AST(const std::string modName) : module(modName, context), builder(context), fpm(&module)
 {
 
+    bool removeDeadCode = false;
+
+    if (removeDeadCode) {
+        for (auto& func : functionList) {
+            DeadCodeRemoval(std::move(functions[func]));
+        }
+    }
+
     // Promote allocas to registers.
     fpm.add(llvm::createPromoteMemoryToRegisterPass());
 
@@ -37,6 +45,39 @@ AST::AST(const std::string modName) : module(modName, context), builder(context)
     fpm.doInitialization();
 
 }
+
+void AST::DeadCodeRemoval(std::unique_ptr<ASTFunction> func) {
+    
+}
+
+void AST::KillUselessBlocks(std::unique_ptr<ASTFunction> func) {
+
+}
+
+void AST::KillPostReturn(std::unique_ptr<ASTFunction> func) {
+
+}
+
+void AST::KillInaccessibleIf(std::unique_ptr<ASTFunction> func) {
+
+}
+
+void AST::KillInaccessibleElse(std::unique_ptr<ASTFunction> func) {
+
+}
+
+void AST::KillInaccessiblePostWhile(std::unique_ptr<ASTFunction> func) {
+
+}
+
+void AST::KillINaccessibleWhile(std::unique_ptr<ASTFunction> func) {
+
+}
+ 
+void AST::KillUselessVars(std::unique_ptr<ASTFunction> func) {
+
+}
+
 
 ASTFunction* AST::AddFunction(const std::string& name, std::unique_ptr<VarType> returnType, ASTFunctionParameters parameters, bool variadic)
 {

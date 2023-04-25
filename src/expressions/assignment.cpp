@@ -1,4 +1,5 @@
 #include "assignment.h"
+#include <iostream>
 
 std::unique_ptr<VarType> ASTExpressionAssignment::ReturnType(ASTFunction& func)
 {

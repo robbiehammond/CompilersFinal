@@ -29,6 +29,22 @@ class AST
     // If the module has been compiled or not.
     bool compiled = false;
 
+    void DeadCodeRemoval(std::unique_ptr<ASTFunction> f);
+
+    void KillUselessBlocks(std::unique_ptr<ASTFunction> func);
+
+    void KillPostReturn(std::unique_ptr<ASTFunction> func);
+
+    void KillInaccessibleIf(std::unique_ptr<ASTFunction> func);
+
+    void KillInaccessibleElse(std::unique_ptr<ASTFunction> func);
+
+    void KillInaccessiblePostWhile(std::unique_ptr<ASTFunction> func);
+
+    void KillINaccessibleWhile(std::unique_ptr<ASTFunction> func);
+
+    void KillUselessVars(std::unique_ptr<ASTFunction> func);
+
 public:
 
     // Function pass manager for function optimizations.

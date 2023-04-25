@@ -16,12 +16,15 @@ std::unique_ptr<VarType> ASTStatementBlock::StatementReturnType(ASTFunction& fun
     // Otherwise, we return nothing since we made it to the end.
 
     // Go through each statement.
+    std::cout << func.name << std::endl;
 
     for (int i = 0; i < statements.size(); i++)
     {
         auto& statement = statements[i];
-        auto ret = statement->StatementReturnType(func);
-        if (ret) return std::move(ret);
+        if (statement) {
+            auto ret = statement->StatementReturnType(func);
+            if (ret) return std::move(ret);
+        }
     }
 
     // Made it through the end, return nothing.
@@ -33,6 +36,7 @@ void ASTStatementBlock::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
 {
 
     // Pretty much just keep compiling until we find a return value. We don't want to keep compiling past any return statements.
+    std::cout << "here" << std::endl;
     for (auto& statement : statements)
     {
         statement->Compile(mod, builder, func);

@@ -125,8 +125,10 @@ funDec: type ID LPAREN params RPAREN SEMICOLON {
 funDef: type ID LPAREN params RPAREN LBRACE varDecs stmts RBRACE {
   auto statements = std::make_unique<ASTStatementBlock>();
   for (auto s : *$8) {
-    auto ptr = std::unique_ptr<ASTStatement>(s);
-    statements->statements.push_back(std::move(ptr));
+    if (s) {
+      auto ptr = std::unique_ptr<ASTStatement>(s);
+      statements->statements.push_back(std::move(ptr));
+    }
   }
   auto parameters = ASTFunctionParameters();
   bool variadic = false;
@@ -138,7 +140,8 @@ funDef: type ID LPAREN params RPAREN LBRACE varDecs stmts RBRACE {
   }
   auto f = ast.AddFunction($2, std::unique_ptr<VarType>($1), std::move(parameters), variadic);
   for (auto v : *$7) {
-    f->AddStackVar(std::move(*v));
+    if (v)
+      f->AddStackVar(std::move(*v));
   }
   f->Define(std::move(statements));
 
@@ -370,10 +373,8 @@ int main(int argc, char **argv) {
     fclose(yyin);
   }
 
-
   // Do the compilation.
   ast.Compile();
-  std::cout << "here" << std::endl;
   ast.WriteLLVMAssemblyToFile(outFile);
   ast.WriteLLVMBitcodeToFile(outFile);
 
