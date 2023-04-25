@@ -1,4 +1,5 @@
 #include "ast.h"
+#include "statements/block.h"
 
 #include <iostream>
 
@@ -47,7 +48,7 @@ AST::AST(const std::string modName) : module(modName, context), builder(context)
 }
 
 void AST::DeadCodeRemoval(std::unique_ptr<ASTFunction> func) {
-    
+    KillPostReturn(std::move(func));
 }
 
 void AST::KillUselessBlocks(std::unique_ptr<ASTFunction> func) {
@@ -55,7 +56,6 @@ void AST::KillUselessBlocks(std::unique_ptr<ASTFunction> func) {
 }
 
 void AST::KillPostReturn(std::unique_ptr<ASTFunction> func) {
-
 }
 
 void AST::KillInaccessibleIf(std::unique_ptr<ASTFunction> func) {

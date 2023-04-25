@@ -22,7 +22,6 @@ typedef std::vector<ASTFunctionParameter> ASTFunctionParameters;
 class ASTFunction
 {
 private:
-
     // List of all the parameters.
     std::vector<std::string> parameters;
 
@@ -39,6 +38,7 @@ private:
     std::unique_ptr<ASTStatement> definition = nullptr;
 
 public:
+    bool optimize = true;
 
     // Name of the function.
     std::string name;

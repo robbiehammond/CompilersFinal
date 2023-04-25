@@ -1,0 +1,1 @@
+./run.sh -i tests/blank.c -fAsm -o tests/blank.ll 

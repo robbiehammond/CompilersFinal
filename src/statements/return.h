@@ -2,6 +2,7 @@
 
 #include "../statement.h"
 #include "../expression.h"
+#include "../function.h"
 
 class ASTStatementReturn : public ASTStatement
 {
