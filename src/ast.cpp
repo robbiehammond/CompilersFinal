@@ -13,13 +13,6 @@
 AST::AST(const std::string modName) : module(modName, context), builder(context), fpm(&module)
 {
 
-    bool removeDeadCode = false;
-
-    if (removeDeadCode) {
-        for (auto& func : functionList) {
-            DeadCodeRemoval(std::move(functions[func]));
-        }
-    }
 
     // Promote allocas to registers.
     //fpm.add(llvm::createPromoteMemoryToRegisterPass());
@@ -102,7 +95,6 @@ ASTFunction* AST::GetFunction(const std::string& name)
 
 void AST::Compile()
 {
-
     // All we need to do is compile each function.
     for (auto& func : functionList)
     {

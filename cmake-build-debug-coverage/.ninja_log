@@ -1,0 +1,92 @@
+# ninja log v5
+1	23	1682461947607411266	lex.yy.cc	80ffda8df8e2c5d3
+1	23	1682461947607411266	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/lex.yy.cc	80ffda8df8e2c5d3
+1	92	1682461947677123437	parser.tab.cc	9b9f6307a4238809
+1	92	1682461947677123437	parser.tab.hh	9b9f6307a4238809
+1	92	1682461947677123437	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc	9b9f6307a4238809
+1	92	1682461947677123437	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh	9b9f6307a4238809
+93	1262	1682461948839597006	CMakeFiles/LLVM-Lab.dir/src/expressions/addition.cpp.o	bbe895f05a9140a6
+94	1286	1682461948866099398	CMakeFiles/LLVM-Lab.dir/src/expressions/bool2Int.cpp.o	1e8bdb348338e619
+95	1325	1682461948902012998	CMakeFiles/LLVM-Lab.dir/src/expressions/float.cpp.o	89025d6a24b49a7c
+93	1331	1682461948908712628	CMakeFiles/LLVM-Lab.dir/src/expressions/bool.cpp.o	f9f529ccdbfa3573
+93	1375	1682461948951825615	CMakeFiles/LLVM-Lab.dir/src/expression.cpp.o	117f636c33fc3db5
+95	1377	1682461948957102142	CMakeFiles/LLVM-Lab.dir/src/expressions/division.cpp.o	819da5d9e21e09cc
+94	1412	1682461948990565876	CMakeFiles/LLVM-Lab.dir/src/expressions/comparison.cpp.o	ed4a875e9a41aac6
+94	1435	1682461948997225964	CMakeFiles/LLVM-Lab.dir/src/expressions/call.cpp.o	bdd22eac998aa5d2
+93	1449	1682461949022971346	CMakeFiles/LLVM-Lab.dir/src/expressions/assignment.cpp.o	ab15c46c1abb8a31
+93	1545	1682461949121508565	CMakeFiles/LLVM-Lab.dir/src/expressions/and.cpp.o	93d0a08cb8dfe68
+93	1867	1682461949441382000	CMakeFiles/LLVM-Lab.dir/src/demo.cpp.o	32cd513a0e1744e0
+1286	2281	1682461949855931561	CMakeFiles/LLVM-Lab.dir/src/expressions/int.cpp.o	def5374dd9ffcbd0
+1265	2359	1682461949938284941	CMakeFiles/LLVM-Lab.dir/src/expressions/float2Int.cpp.o	eac2ab2ddd87bfa6
+92	2442	1682461950014873036	CMakeFiles/LLVM-Lab.dir/src/ast.cpp.o	f05c880731e6dd6b
+1331	2461	1682461950039195608	CMakeFiles/LLVM-Lab.dir/src/expressions/int2Float.cpp.o	72d1617aa1f3bb83
+1375	2493	1682461950070631315	CMakeFiles/LLVM-Lab.dir/src/expressions/negative.cpp.o	f1c4cf6a9b65d1dd
+1325	2508	1682461950086315564	CMakeFiles/LLVM-Lab.dir/src/expressions/int2Bool.cpp.o	24ecccad407d055c
+1449	2514	1682461950092424519	CMakeFiles/LLVM-Lab.dir/src/expressions/subtraction.cpp.o	168a94ddb65c8938
+1377	2526	1682461950100021995	CMakeFiles/LLVM-Lab.dir/src/expressions/multiplication.cpp.o	5dcff96ccf08c33b
+1545	2553	1682461950130042850	CMakeFiles/LLVM-Lab.dir/src/expressions/variable.cpp.o	2f0a4702306aa996
+1412	2569	1682461950142810269	CMakeFiles/LLVM-Lab.dir/src/expressions/or.cpp.o	8a6febce6680c023
+2526	2842	1682461950421187197	CMakeFiles/LLVM-Lab.dir/src/types/simple.cpp.o	d970b59f9f41346e
+2281	2848	1682461950427969495	CMakeFiles/LLVM-Lab.dir/src/scopeTable.cpp.o	443f2abd46fca028
+2514	2920	1682461950497332328	CMakeFiles/LLVM-Lab.dir/src/types/function.cpp.o	c19b7db525dfe3d0
+1435	3081	1682461950655838965	CMakeFiles/LLVM-Lab.dir/src/expressions/string.cpp.o	71c2788808b221c7
+1867	3203	1682461950780243775	CMakeFiles/LLVM-Lab.dir/src/function.cpp.o	210205a11ec3aacf
+2360	3275	1682461950853919999	CMakeFiles/LLVM-Lab.dir/src/statements/block.cpp.o	982d6540ee241014
+2461	3317	1682461950896052514	CMakeFiles/LLVM-Lab.dir/src/statements/if.cpp.o	e85cd982d2c77442
+2508	3327	1682461950906832615	CMakeFiles/LLVM-Lab.dir/src/statements/while.cpp.o	73078476d1968b24
+2443	3337	1682461950916790830	CMakeFiles/LLVM-Lab.dir/src/statements/for.cpp.o	7c40fc91941f3c4
+2494	3346	1682461950923633503	CMakeFiles/LLVM-Lab.dir/src/statements/return.cpp.o	589ec5e15e2bff51
+2553	3346	1682461950924406639	CMakeFiles/LLVM-Lab.dir/lex.yy.cc.o	85767e8301cb9091
+2569	3573	1682461951151421222	CMakeFiles/LLVM-Lab.dir/parser.tab.cc.o	f2e35061667ec87e
+3573	3654	1682461951237053062	../bin/LLVM-Lab	1608e0166e7b9608
+7	1164	1682462261321938055	CMakeFiles/LLVM-Lab.dir/src/ast.cpp.o	f05c880731e6dd6b
+1164	1248	1682462261410929648	../bin/LLVM-Lab	1608e0166e7b9608
+6	93	1682462536505177323	parser.tab.cc	9b9f6307a4238809
+6	93	1682462536505177323	parser.tab.hh	9b9f6307a4238809
+6	93	1682462536505177323	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc	9b9f6307a4238809
+6	93	1682462536505177323	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh	9b9f6307a4238809
+94	752	1682462537159346300	CMakeFiles/LLVM-Lab.dir/lex.yy.cc.o	85767e8301cb9091
+94	938	1682462537345457884	CMakeFiles/LLVM-Lab.dir/parser.tab.cc.o	f2e35061667ec87e
+938	1022	1682462537432212864	../bin/LLVM-Lab	1608e0166e7b9608
+6	94	1682462921163516993	parser.tab.cc	9b9f6307a4238809
+6	94	1682462921163516993	parser.tab.hh	9b9f6307a4238809
+6	94	1682462921163516993	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc	9b9f6307a4238809
+6	94	1682462921163516993	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh	9b9f6307a4238809
+94	1016	1682462922072244626	CMakeFiles/LLVM-Lab.dir/src/expressions/variable.cpp.o	2f0a4702306aa996
+95	1056	1682462922116674338	CMakeFiles/LLVM-Lab.dir/src/statements/if.cpp.o	e85cd982d2c77442
+95	1064	1682462922127861611	CMakeFiles/LLVM-Lab.dir/src/statements/for.cpp.o	7c40fc91941f3c4
+95	1111	1682462922171228434	CMakeFiles/LLVM-Lab.dir/src/statements/return.cpp.o	589ec5e15e2bff51
+95	1113	1682462922171941651	CMakeFiles/LLVM-Lab.dir/src/statements/block.cpp.o	982d6540ee241014
+95	1117	1682462922181738239	CMakeFiles/LLVM-Lab.dir/src/statements/while.cpp.o	73078476d1968b24
+96	1135	1682462922200555988	CMakeFiles/LLVM-Lab.dir/lex.yy.cc.o	85767e8301cb9091
+94	1142	1682462922207157450	CMakeFiles/LLVM-Lab.dir/src/expressions/and.cpp.o	93d0a08cb8dfe68
+94	1152	1682462922217068831	CMakeFiles/LLVM-Lab.dir/src/expressions/or.cpp.o	8a6febce6680c023
+94	1240	1682462922304875992	CMakeFiles/LLVM-Lab.dir/src/demo.cpp.o	32cd513a0e1744e0
+95	1318	1682462922382583352	CMakeFiles/LLVM-Lab.dir/src/function.cpp.o	210205a11ec3aacf
+94	1610	1682462922673488153	CMakeFiles/LLVM-Lab.dir/src/ast.cpp.o	f05c880731e6dd6b
+1016	1903	1682462922968231548	CMakeFiles/LLVM-Lab.dir/parser.tab.cc.o	f2e35061667ec87e
+1903	1982	1682462923050583845	../bin/LLVM-Lab	1608e0166e7b9608
+7	1247	1682462940114300611	CMakeFiles/LLVM-Lab.dir/src/ast.cpp.o	f05c880731e6dd6b
+1247	1342	1682462940214726480	../bin/LLVM-Lab	1608e0166e7b9608
+5	914	1682463041946127062	CMakeFiles/LLVM-Lab.dir/src/function.cpp.o	210205a11ec3aacf
+914	999	1682463042034854443	../bin/LLVM-Lab	1608e0166e7b9608
+6	939	1682463072348699300	CMakeFiles/LLVM-Lab.dir/src/function.cpp.o	210205a11ec3aacf
+939	1021	1682463072434793769	../bin/LLVM-Lab	1608e0166e7b9608
+7	831	1682463121341136364	CMakeFiles/LLVM-Lab.dir/src/function.cpp.o	210205a11ec3aacf
+831	914	1682463121428130911	../bin/LLVM-Lab	1608e0166e7b9608
+6	1126	1682464022515828271	CMakeFiles/LLVM-Lab.dir/src/ast.cpp.o	f05c880731e6dd6b
+1126	1211	1682464022604989312	../bin/LLVM-Lab	1608e0166e7b9608
+6	93	1682464707255200613	parser.tab.cc	9b9f6307a4238809
+6	93	1682464707255200613	parser.tab.hh	9b9f6307a4238809
+6	93	1682464707255200613	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc	9b9f6307a4238809
+6	93	1682464707255200613	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh	9b9f6307a4238809
+93	756	1682464707913551134	CMakeFiles/LLVM-Lab.dir/lex.yy.cc.o	85767e8301cb9091
+94	954	1682464708110757234	CMakeFiles/LLVM-Lab.dir/parser.tab.cc.o	f2e35061667ec87e
+954	1037	1682464708197521997	../bin/LLVM-Lab	1608e0166e7b9608
+6	95	1682464823280061741	parser.tab.cc	9b9f6307a4238809
+6	95	1682464823280061741	parser.tab.hh	9b9f6307a4238809
+6	95	1682464823280061741	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc	9b9f6307a4238809
+6	95	1682464823280061741	/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh	9b9f6307a4238809
+95	745	1682464823925439700	CMakeFiles/LLVM-Lab.dir/lex.yy.cc.o	85767e8301cb9091
+96	941	1682464824120819054	CMakeFiles/LLVM-Lab.dir/parser.tab.cc.o	f2e35061667ec87e
+941	1026	1682464824209546441	../bin/LLVM-Lab	1608e0166e7b9608

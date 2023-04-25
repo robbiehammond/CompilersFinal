@@ -1,10 +1,11 @@
-void main() {
+int main() {
     int i;
     int j;
     int x;
     i = 5;
     j = 10;
     x = 1;
+    return x;
 }
 
 void main2() {

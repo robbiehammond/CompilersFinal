@@ -206,7 +206,8 @@ jumpStmt: RETURN SEMICOLON {
   $$ = retStmt;
  }| RETURN expr SEMICOLON {
   auto retStmt = new ASTStatementReturn();
-  retStmt->returnExpression = std::unique_ptr<ASTExpression>($2);
+  retStmt->returnExpression = std::unique_ptr<ASTExpression>(std::move($2));
+  $$ = retStmt;
  }; /* There should also be break statements here, but they are not implemented in the AST */
 
 expr: orExpr { $$ = $1;} | ID EQUALS_SIGN expr {

@@ -95,7 +95,6 @@ void ASTFunction::Define(std::unique_ptr<ASTStatement> definition)
 
 void ASTFunction::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder)
 {
-
     // First, add a new function declaration to our scope.
     auto func = llvm::Function::Create((llvm::FunctionType*)funcType->GetLLVMType(builder.getContext()), llvm::GlobalValue::LinkageTypes::ExternalLinkage, name, mod);
     ast.scopeTable.SetVariableValue(name, func);
