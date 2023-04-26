@@ -22,3 +22,13 @@ void main2() {
     j = 2;
     i = 5;
 }
+
+void main3() {
+    int i;
+    int j;
+    int k;
+    for (i = 0; i == 3; i = i + 1) {
+        j = j + 1;
+    }
+    k = 5;
+}

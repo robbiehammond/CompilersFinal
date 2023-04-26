@@ -31,26 +31,10 @@ std::unique_ptr<VarType> ASTStatementBlock::StatementReturnType(ASTFunction& fun
 
 }
 
-void ASTStatementBlock::RemoveAfterReturn(ASTFunction& func) {
-    bool passedRet = false;
-    for (auto& statement : statements)
-    {
-        if (statement->StatementReturnType(func)) {
-            passedRet = true;
-        }
-        if (passedRet) {
-            statement->ignore = true;
-        }
-    }
-}
-
 void ASTStatementBlock::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func)
 {
 
     // Pretty much just keep compiling until we find a return value. We don't want to keep compiling past any return statements.
-    if (func.optimize) {
-        RemoveAfterReturn(func);
-    }
     for (auto& statement : statements)
     {
         statement->Compile(mod, builder, func);

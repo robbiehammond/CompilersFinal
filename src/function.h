@@ -38,7 +38,6 @@ private:
     std::unique_ptr<ASTStatement> definition = nullptr;
 
 public:
-    bool optimize = true;
 
     // Name of the function.
     std::string name;

@@ -72,13 +72,14 @@ extern int yydebug;
 #include "../src/expressions/negative.h"
 #include "../src/statements/block.h"
 #include "../src/statements/while.h"
+#include "../src/statements/for.h"
 #include "../src/statements/if.h"
 #include "../src/statements/return.h"
 #include "../src/types/simple.h"
 extern FILE *yyin;
  
 
-#line 82 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh"
+#line 83 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh"
 
 /* Token kinds.  */
 #ifndef YYTOKENTYPE
@@ -136,7 +137,7 @@ extern FILE *yyin;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 50 "src/frontend/parser.y"
+#line 51 "src/frontend/parser.y"
 
   bool boolval;
   int intval;
@@ -152,7 +153,7 @@ union YYSTYPE
   VarType *type;
   ASTExpressionComparisonType rel;
 
-#line 156 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh"
+#line 157 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.hh"
 
 };
 typedef union YYSTYPE YYSTYPE;

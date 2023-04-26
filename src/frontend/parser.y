@@ -24,6 +24,7 @@
 #include "../src/expressions/negative.h"
 #include "../src/statements/block.h"
 #include "../src/statements/while.h"
+#include "../src/statements/for.h"
 #include "../src/statements/if.h"
 #include "../src/statements/return.h"
 #include "../src/types/simple.h"
@@ -195,8 +196,9 @@ selStmt: IF LPAREN expr RPAREN stmt {
 
 iterStmt: WHILE LPAREN expr RPAREN stmt {
   $$ = new ASTStatementWhile(std::unique_ptr<ASTExpression>($3), std::unique_ptr<ASTStatement>($5));
- } | FOR LPAREN expr SEMICOLON expr SEMICOLON expr SEMICOLON RPAREN stmt {
-  //$$ = new ASTStatementFor(std::unique_ptr<ASTExpression>($3), std::unique_ptr<ASTExpression>($5), std::unique_ptr<ASTExpression>($7), std::unique_ptr<ASTStatement>($10));
+ } | FOR LPAREN expr SEMICOLON expr SEMICOLON expr RPAREN stmt {
+  std::cout << "here" << std::endl;
+  $$ = new ASTStatementFor(std::unique_ptr<ASTExpression>($3), std::unique_ptr<ASTExpression>($5), std::unique_ptr<ASTExpression>($7), std::unique_ptr<ASTStatement>($9));
  };
 
 

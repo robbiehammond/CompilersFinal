@@ -67,7 +67,7 @@
 
 
 /* First part of user prologue.  */
-#line 33 "src/frontend/parser.y"
+#line 34 "src/frontend/parser.y"
 
 #include "parser.tab.hh"
 
@@ -516,7 +516,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  75
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  126
+#define YYNSTATES  125
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   296
@@ -569,14 +569,14 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    85,    85,    85,    86,    86,    87,    87,    89,    91,
-      93,    95,    97,   100,   104,   107,   111,   125,   158,   158,
-     159,   162,   165,   170,   170,   177,   177,   177,   178,   180,
-     183,   187,   190,   192,   196,   198,   203,   207,   213,   213,
-     217,   217,   220,   220,   223,   226,   227,   229,   230,   232,
-     234,   236,   238,   240,   243,   243,   245,   248,   248,   250,
-     252,   256,   258,   259,   261,   263,   265,   268,   275,   279,
-     282,   286,   286,   286,   287,   288
+       0,    86,    86,    86,    87,    87,    88,    88,    90,    92,
+      94,    96,    98,   101,   105,   108,   112,   126,   159,   159,
+     160,   163,   166,   171,   171,   178,   178,   178,   179,   181,
+     184,   188,   191,   193,   197,   199,   205,   209,   215,   215,
+     219,   219,   222,   222,   225,   228,   229,   231,   232,   234,
+     236,   238,   240,   242,   245,   245,   247,   250,   250,   252,
+     254,   258,   260,   261,   263,   265,   267,   270,   277,   281,
+     284,   288,   288,   288,   289,   290
 };
 #endif
 
@@ -614,7 +614,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-108)
+#define YYPACT_NINF (-65)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -628,19 +628,19 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     170,  -108,  -108,  -108,  -108,  -108,     1,   170,  -108,     5,
-    -108,  -108,  -108,  -108,    10,   170,    42,    38,    39,  -108,
-       9,   157,  -108,  -108,  -108,    56,   170,  -108,    60,    59,
-       0,  -108,  -108,    55,    -9,  -108,    99,  -108,  -108,    64,
-      68,    57,   118,   121,  -108,  -108,  -108,  -108,  -108,  -108,
-    -108,  -108,    70,    48,    63,  -108,  -108,   142,    -8,  -108,
-    -108,  -108,  -108,  -108,  -108,    99,    96,    99,    75,    33,
-      99,    99,  -108,    72,    80,  -108,  -108,  -108,   118,   118,
-    -108,  -108,  -108,  -108,  -108,  -108,   113,   113,   113,   113,
-     113,   113,    83,  -108,  -108,    29,  -108,  -108,  -108,    87,
-      89,  -108,    63,  -108,    -8,    -8,    27,  -108,  -108,  -108,
-      99,  -108,    99,    74,    74,    92,  -108,    88,  -108,    99,
-      74,    94,  -108,    97,    74,  -108
+     170,   -65,   -65,   -65,   -65,   -65,    13,   170,   -65,    24,
+     -65,   -65,   -65,   -65,     6,   170,    42,    21,    37,   -65,
+      -8,   157,   -65,   -65,   -65,    48,   170,   -65,    52,    54,
+       0,   -65,   -65,    47,    -2,   -65,    99,   -65,   -65,    59,
+      64,    57,   118,   121,   -65,   -65,   -65,   -65,   -65,   -65,
+     -65,   -65,    69,    58,    63,   -65,   -65,   142,   -12,   -65,
+     -65,   -65,   -65,   -65,   -65,    99,    96,    99,    70,    33,
+      99,    99,   -65,    77,    80,   -65,   -65,   -65,   118,   118,
+     -65,   -65,   -65,   -65,   -65,   -65,   113,   113,   113,   113,
+     113,   113,    83,   -65,   -65,    29,   -65,   -65,   -65,    87,
+      89,   -65,    63,   -65,   -12,   -12,    23,   -65,   -65,   -65,
+      99,   -65,    99,    74,    74,    92,   -65,    88,   -65,    99,
+      74,    97,   -65,    74,   -65
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -660,16 +660,16 @@ static const yytype_int8 yydefact[] =
        0,     0,     0,    68,    70,     0,    39,    64,    24,     0,
        0,    37,    41,    43,    55,    56,    46,    58,    59,    60,
        0,    67,     0,     0,     0,     0,    69,    32,    34,     0,
-       0,     0,    33,     0,     0,    35
+       0,     0,    33,     0,    35
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-    -108,  -108,  -108,   104,     7,  -108,  -108,  -108,  -108,  -108,
-    -108,  -107,  -108,    78,  -108,  -108,  -108,   -36,  -108,    40,
-     -34,  -108,  -108,    28,   -24,   -35,    76,  -108,  -108,  -108,
-    -108,  -108
+     -65,   -65,   -65,   104,   -14,   -65,   -65,   -65,   -65,   -65,
+     -65,   -54,   -65,    67,   -65,   -65,   -65,   -36,   -65,    38,
+     -34,   -65,   -65,    27,   -24,   -64,    75,   -65,   -65,   -65,
+     -65,   -65
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -686,18 +686,18 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      68,    12,    66,    33,    34,    73,   117,   118,    75,    14,
-      35,    36,    67,   122,    37,    38,    39,   125,    40,    22,
-      41,    15,    16,    23,    42,    89,    90,    91,    25,    92,
-      94,    96,    43,    28,    99,   100,    33,    34,    44,    45,
+      68,    16,    22,    33,    34,    73,    23,    25,    75,    66,
+      35,    36,    28,    12,    37,    38,    39,    15,    40,    67,
+      41,    89,    90,    91,    42,   107,   108,   109,    14,    92,
+      94,    96,    43,    20,    99,   100,    33,    34,    44,    45,
       46,   111,   112,    35,    36,   103,    19,    37,    98,    39,
-      20,    40,    21,    41,   107,   108,   109,    42,    86,    87,
-      27,    34,   104,   105,    31,    43,    65,    72,    36,    32,
-      78,    44,    45,    46,   115,    70,   116,    33,    34,    71,
-      77,    42,   101,   121,    35,    36,    79,    97,    37,    43,
+      21,    40,    27,    41,    86,    87,    31,    42,    65,   117,
+     118,    34,   104,   105,    32,    43,   122,    72,    36,   124,
+      70,    44,    45,    46,   115,    71,   116,    33,    34,    77,
+      78,    42,    97,   121,    35,    36,    79,   101,    37,    43,
       39,    66,    40,   110,    41,    44,    45,    46,    42,   113,
-      34,   114,   119,    34,   123,   120,    43,    36,    93,   124,
-      36,    13,    44,    45,    46,    69,   106,    74,   102,    76,
+      34,   114,   119,    34,    69,   120,    43,    36,    93,   123,
+      36,    13,    44,    45,    46,   106,   102,    74,    76,     0,
       42,     0,    74,    42,    36,    74,     0,     0,    43,    36,
        0,    43,    36,     0,    44,    45,    46,    44,    45,    46,
        0,     0,    42,     0,     0,    43,     0,     0,     0,     0,
@@ -710,18 +710,18 @@ static const yytype_int8 yytable[] =
 
 static const yytype_int8 yycheck[] =
 {
-      36,     0,    11,     3,     4,    41,   113,   114,    42,     4,
-      10,    11,    21,   120,    14,    15,    16,   124,    18,    10,
-      20,    11,    15,    14,    24,    33,    34,    35,    21,    65,
-      66,    67,    32,    26,    70,    71,     3,     4,    38,    39,
+      36,    15,    10,     3,     4,    41,    14,    21,    42,    11,
+      10,    11,    26,     0,    14,    15,    16,    11,    18,    21,
+      20,    33,    34,    35,    24,    89,    90,    91,     4,    65,
+      66,    67,    32,    12,    70,    71,     3,     4,    38,    39,
       40,    12,    13,    10,    11,    79,     4,    14,    15,    16,
-      12,    18,    13,    20,    89,    90,    91,    24,    31,    32,
-       4,     4,    86,    87,     4,    32,    11,    10,    11,    10,
-      22,    38,    39,    40,   110,    11,   112,     3,     4,    11,
-      10,    24,    10,   119,    10,    11,    23,    12,    14,    32,
+      13,    18,     4,    20,    31,    32,     4,    24,    11,   113,
+     114,     4,    86,    87,    10,    32,   120,    10,    11,   123,
+      11,    38,    39,    40,   110,    11,   112,     3,     4,    10,
+      22,    24,    12,   119,    10,    11,    23,    10,    14,    32,
       16,    11,    18,    10,    20,    38,    39,    40,    24,    12,
-       4,    12,    10,     4,    10,    17,    32,    11,    12,    12,
-      11,     7,    38,    39,    40,    37,    88,     4,    78,    43,
+       4,    12,    10,     4,    37,    17,    32,    11,    12,    12,
+      11,     7,    38,    39,    40,    88,    78,     4,    43,    -1,
       24,    -1,     4,    24,    11,     4,    -1,    -1,    32,    11,
       -1,    32,    11,    -1,    38,    39,    40,    38,    39,    40,
       -1,    -1,    24,    -1,    -1,    32,    -1,    -1,    -1,    -1,
@@ -748,7 +748,7 @@ static const yytype_int8 yystos[] =
       34,    35,    59,    12,    59,    70,    59,    12,    15,    59,
       59,    10,    61,    62,    66,    66,    65,    67,    67,    67,
       10,    12,    13,    12,    12,    59,    59,    53,    53,    10,
-      17,    59,    53,    10,    12,    53
+      17,    59,    53,    12,    53
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
@@ -770,7 +770,7 @@ static const yytype_int8 yyr2[] =
        0,     2,     0,     1,     2,     1,     1,     1,     1,     1,
        1,     1,     1,     2,     3,     0,     6,     9,     1,     0,
        4,     2,     3,     1,     3,     1,     1,     1,     2,     1,
-       2,     0,     5,     7,     5,    10,     2,     3,     1,     3,
+       2,     0,     5,     7,     5,     9,     2,     3,     1,     3,
        1,     3,     1,     3,     2,     1,     3,     1,     1,     1,
        1,     1,     1,     1,     1,     3,     3,     1,     3,     3,
        3,     2,     1,     1,     3,     1,     1,     4,     3,     3,
@@ -1508,7 +1508,7 @@ yyreduce:
   switch (yyn)
     {
   case 8: /* type: BOOL_TYPE  */
-#line 89 "src/frontend/parser.y"
+#line 90 "src/frontend/parser.y"
                 {
   (yyval.type) = new VarTypeSimple(VarTypeSimple::BoolType);
  }
@@ -1516,7 +1516,7 @@ yyreduce:
     break;
 
   case 9: /* type: INT_TYPE  */
-#line 91 "src/frontend/parser.y"
+#line 92 "src/frontend/parser.y"
              {
   (yyval.type) = new VarTypeSimple(VarTypeSimple::IntType);
  }
@@ -1524,7 +1524,7 @@ yyreduce:
     break;
 
   case 10: /* type: FLOAT_TYPE  */
-#line 93 "src/frontend/parser.y"
+#line 94 "src/frontend/parser.y"
                {
   (yyval.type) = new VarTypeSimple(VarTypeSimple::FloatType);
  }
@@ -1532,7 +1532,7 @@ yyreduce:
     break;
 
   case 11: /* type: STRING_TYPE  */
-#line 95 "src/frontend/parser.y"
+#line 96 "src/frontend/parser.y"
                 {
   (yyval.type) = new VarTypeSimple(VarTypeSimple::StringType);
  }
@@ -1540,7 +1540,7 @@ yyreduce:
     break;
 
   case 12: /* type: VOID_TYPE  */
-#line 97 "src/frontend/parser.y"
+#line 98 "src/frontend/parser.y"
                {
   (yyval.type) = new VarTypeSimple(VarTypeSimple::VoidType);
  }
@@ -1548,7 +1548,7 @@ yyreduce:
     break;
 
   case 13: /* varDec: type ID  */
-#line 100 "src/frontend/parser.y"
+#line 101 "src/frontend/parser.y"
                 {
   //ASTFunctionParameter is just a tuple of a unique pointer to a type and a string (see definition in function.h)
   (yyval.var) = new ASTFunctionParameter(std::unique_ptr<VarType>((yyvsp[-1].type)), (yyvsp[0].strval)); 
@@ -1557,7 +1557,7 @@ yyreduce:
     break;
 
   case 14: /* varDecs: varDecs varDec SEMICOLON  */
-#line 104 "src/frontend/parser.y"
+#line 105 "src/frontend/parser.y"
                                   {
   (yyval.vars) = (yyvsp[-2].vars); //We know that varDecs is always a pointer to vector of variables, so we can just copy it and push the next variable
   (yyval.vars)->push_back((yyvsp[-1].var));
@@ -1566,7 +1566,7 @@ yyreduce:
     break;
 
   case 15: /* varDecs: %empty  */
-#line 107 "src/frontend/parser.y"
+#line 108 "src/frontend/parser.y"
      {
   (yyval.vars) = new std::vector<ASTFunctionParameter *>();
  }
@@ -1574,7 +1574,7 @@ yyreduce:
     break;
 
   case 16: /* funDec: type ID LPAREN params RPAREN SEMICOLON  */
-#line 111 "src/frontend/parser.y"
+#line 112 "src/frontend/parser.y"
                                                {
   //create the parameters
   auto parameters = ASTFunctionParameters();
@@ -1592,7 +1592,7 @@ yyreduce:
     break;
 
   case 17: /* funDef: type ID LPAREN params RPAREN LBRACE varDecs stmts RBRACE  */
-#line 125 "src/frontend/parser.y"
+#line 126 "src/frontend/parser.y"
                                                                  {
   auto statements = std::make_unique<ASTStatementBlock>();
   for (auto s : *(yyvsp[-1].stmtVec)) {
@@ -1630,13 +1630,13 @@ yyreduce:
     break;
 
   case 19: /* params: %empty  */
-#line 158 "src/frontend/parser.y"
+#line 159 "src/frontend/parser.y"
                     {(yyval.vars) = new std::vector<ASTFunctionParameter *>();}
 #line 1636 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 20: /* paramList: paramList COMMA type ID  */
-#line 159 "src/frontend/parser.y"
+#line 160 "src/frontend/parser.y"
                                    { // This works similarly to varDecs
   (yyval.vars) = (yyvsp[-3].vars);
   (yyval.vars)->push_back(new ASTFunctionParameter(std::unique_ptr<VarType>((yyvsp[-1].type)), (yyvsp[0].strval)));
@@ -1645,7 +1645,7 @@ yyreduce:
     break;
 
   case 21: /* paramList: type ID  */
-#line 162 "src/frontend/parser.y"
+#line 163 "src/frontend/parser.y"
              {
    (yyval.vars) = new std::vector<ASTFunctionParameter *>();
    (yyval.vars)->push_back(new ASTFunctionParameter(std::unique_ptr<VarType>((yyvsp[-1].type)), (yyvsp[0].strval)));
@@ -1654,7 +1654,7 @@ yyreduce:
     break;
 
   case 22: /* paramList: paramList COMMA VARIADIC  */
-#line 165 "src/frontend/parser.y"
+#line 166 "src/frontend/parser.y"
                               {
   (yyval.vars) = new std::vector<ASTFunctionParameter *>();
   (yyval.vars)->push_back(nullptr); // Using a null pointer to indicate a variadic function (see funDec)
@@ -1663,13 +1663,13 @@ yyreduce:
     break;
 
   case 23: /* stmt: exprStmt  */
-#line 170 "src/frontend/parser.y"
+#line 171 "src/frontend/parser.y"
                {(yyval.stmt) = (yyvsp[0].stmt);}
 #line 1669 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 24: /* stmt: LBRACE stmts RBRACE  */
-#line 170 "src/frontend/parser.y"
+#line 171 "src/frontend/parser.y"
                                                 {
   //"stmts" is a vector of plain pointers to statements. We convert it to a statement block as follows:
   auto statements = new ASTStatementBlock();
@@ -1682,25 +1682,25 @@ yyreduce:
     break;
 
   case 25: /* stmt: selStmt  */
-#line 177 "src/frontend/parser.y"
+#line 178 "src/frontend/parser.y"
             {(yyval.stmt) = (yyvsp[0].stmt);}
 #line 1688 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 26: /* stmt: iterStmt  */
-#line 177 "src/frontend/parser.y"
+#line 178 "src/frontend/parser.y"
                                   {(yyval.stmt) = (yyvsp[0].stmt);}
 #line 1694 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 27: /* stmt: jumpStmt  */
-#line 177 "src/frontend/parser.y"
+#line 178 "src/frontend/parser.y"
                                                         {(yyval.stmt) = (yyvsp[0].stmt);}
 #line 1700 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 28: /* exprStmt: expr SEMICOLON  */
-#line 178 "src/frontend/parser.y"
+#line 179 "src/frontend/parser.y"
                          {
   (yyval.stmt) = (yyvsp[-1].exp); //implicit cast expr -> stmt
  }
@@ -1708,7 +1708,7 @@ yyreduce:
     break;
 
   case 29: /* exprStmt: SEMICOLON  */
-#line 180 "src/frontend/parser.y"
+#line 181 "src/frontend/parser.y"
                {
   (yyval.stmt) = new ASTStatementBlock(); //empty statement = empty block
  }
@@ -1716,7 +1716,7 @@ yyreduce:
     break;
 
   case 30: /* stmts: stmts stmt  */
-#line 183 "src/frontend/parser.y"
+#line 184 "src/frontend/parser.y"
                   {
   //Here, we just place the statements into a vector. They'll be added to the AST in a parent's code action.
   (yyval.stmtVec) = (yyvsp[-1].stmtVec);
@@ -1726,7 +1726,7 @@ yyreduce:
     break;
 
   case 31: /* stmts: %empty  */
-#line 187 "src/frontend/parser.y"
+#line 188 "src/frontend/parser.y"
     {
   (yyval.stmtVec) = new std::vector<ASTStatement *>();
  }
@@ -1734,7 +1734,7 @@ yyreduce:
     break;
 
   case 32: /* selStmt: IF LPAREN expr RPAREN stmt  */
-#line 190 "src/frontend/parser.y"
+#line 191 "src/frontend/parser.y"
                                     {
   (yyval.stmt) = new ASTStatementIf(std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTStatement>((yyvsp[0].stmt)), std::unique_ptr<ASTStatement>(nullptr));
  }
@@ -1742,7 +1742,7 @@ yyreduce:
     break;
 
   case 33: /* selStmt: IF LPAREN expr RPAREN stmt ELSE stmt  */
-#line 192 "src/frontend/parser.y"
+#line 193 "src/frontend/parser.y"
                                           {
   (yyval.stmt) = new ASTStatementIf(std::unique_ptr<ASTExpression>((yyvsp[-4].exp)), std::unique_ptr<ASTStatement>((yyvsp[-2].stmt)), std::unique_ptr<ASTStatement>((yyvsp[0].stmt)));
  }
@@ -1750,256 +1750,257 @@ yyreduce:
     break;
 
   case 34: /* iterStmt: WHILE LPAREN expr RPAREN stmt  */
-#line 196 "src/frontend/parser.y"
+#line 197 "src/frontend/parser.y"
                                         {
   (yyval.stmt) = new ASTStatementWhile(std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTStatement>((yyvsp[0].stmt)));
  }
 #line 1758 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
-  case 35: /* iterStmt: FOR LPAREN expr SEMICOLON expr SEMICOLON expr SEMICOLON RPAREN stmt  */
-#line 198 "src/frontend/parser.y"
-                                                                         {
-  //$$ = new ASTStatementFor(std::unique_ptr<ASTExpression>($3), std::unique_ptr<ASTExpression>($5), std::unique_ptr<ASTExpression>($7), std::unique_ptr<ASTStatement>($10));
+  case 35: /* iterStmt: FOR LPAREN expr SEMICOLON expr SEMICOLON expr RPAREN stmt  */
+#line 199 "src/frontend/parser.y"
+                                                               {
+  std::cout << "here" << std::endl;
+  (yyval.stmt) = new ASTStatementFor(std::unique_ptr<ASTExpression>((yyvsp[-6].exp)), std::unique_ptr<ASTExpression>((yyvsp[-4].exp)), std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTStatement>((yyvsp[0].stmt)));
  }
-#line 1766 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1767 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 36: /* jumpStmt: RETURN SEMICOLON  */
-#line 203 "src/frontend/parser.y"
+#line 205 "src/frontend/parser.y"
                            {
   auto retStmt = new ASTStatementReturn();
   retStmt->returnExpression = std::unique_ptr<ASTExpression>(nullptr);
   (yyval.stmt) = retStmt;
  }
-#line 1776 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1777 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 37: /* jumpStmt: RETURN expr SEMICOLON  */
-#line 207 "src/frontend/parser.y"
+#line 209 "src/frontend/parser.y"
                           {
   auto retStmt = new ASTStatementReturn();
   retStmt->returnExpression = std::unique_ptr<ASTExpression>(std::move((yyvsp[-1].exp)));
   (yyval.stmt) = retStmt;
  }
-#line 1786 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1787 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 38: /* expr: orExpr  */
-#line 213 "src/frontend/parser.y"
+#line 215 "src/frontend/parser.y"
              { (yyval.exp) = (yyvsp[0].exp);}
-#line 1792 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1793 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 39: /* expr: ID EQUALS_SIGN expr  */
-#line 213 "src/frontend/parser.y"
+#line 215 "src/frontend/parser.y"
                                                {
   auto var = new ASTExpressionVariable((yyvsp[-2].strval));
   (yyval.exp) = new ASTExpressionAssignment(std::unique_ptr<ASTExpression>(var), std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1801 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1802 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 40: /* orExpr: andExpr  */
-#line 217 "src/frontend/parser.y"
+#line 219 "src/frontend/parser.y"
                 {(yyval.exp) = (yyvsp[0].exp);}
-#line 1807 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1808 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 41: /* orExpr: orExpr LOGICAL_OR andExpr  */
-#line 217 "src/frontend/parser.y"
+#line 219 "src/frontend/parser.y"
                                                        {
   (yyval.exp) = new ASTExpressionOr(std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1815 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1816 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 42: /* andExpr: unaryRelExpr  */
-#line 220 "src/frontend/parser.y"
+#line 222 "src/frontend/parser.y"
                       {(yyval.exp) = (yyvsp[0].exp);}
-#line 1821 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1822 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 43: /* andExpr: andExpr LOGICAL_AND unaryRelExpr  */
-#line 220 "src/frontend/parser.y"
+#line 222 "src/frontend/parser.y"
                                                                     {
   (yyval.exp) = new ASTExpressionAnd(std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1829 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1830 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 44: /* unaryRelExpr: LOGICAL_NOT unaryRelExpr  */
-#line 223 "src/frontend/parser.y"
+#line 225 "src/frontend/parser.y"
                                        {
   //logical not isn't implmented in ast, so we just don't do anything
   (yyval.exp) = (yyvsp[0].exp);
  }
-#line 1838 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1839 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 45: /* unaryRelExpr: relExpr  */
-#line 226 "src/frontend/parser.y"
+#line 228 "src/frontend/parser.y"
              {(yyval.exp) = (yyvsp[0].exp);}
-#line 1844 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1845 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 46: /* relExpr: term relop term  */
-#line 227 "src/frontend/parser.y"
+#line 229 "src/frontend/parser.y"
                          {
   (yyval.exp) = new ASTExpressionComparison((yyvsp[-1].rel), std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1852 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1853 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 47: /* relExpr: term  */
-#line 229 "src/frontend/parser.y"
+#line 231 "src/frontend/parser.y"
           {(yyval.exp) = (yyvsp[0].exp);}
-#line 1858 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1859 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 48: /* relop: RELOP_GT  */
-#line 230 "src/frontend/parser.y"
+#line 232 "src/frontend/parser.y"
                 {
   (yyval.rel) = ASTExpressionComparisonType::GreaterThan;
  }
-#line 1866 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1867 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 49: /* relop: RELOP_LT  */
-#line 232 "src/frontend/parser.y"
+#line 234 "src/frontend/parser.y"
              {
   (yyval.rel) = ASTExpressionComparisonType::LessThan;
  }
-#line 1874 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1875 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 50: /* relop: RELOP_GE  */
-#line 234 "src/frontend/parser.y"
+#line 236 "src/frontend/parser.y"
              {
   (yyval.rel) = ASTExpressionComparisonType::GreaterThanOrEqual;
  }
-#line 1882 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1883 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 51: /* relop: RELOP_LE  */
-#line 236 "src/frontend/parser.y"
+#line 238 "src/frontend/parser.y"
              {
   (yyval.rel) = ASTExpressionComparisonType::LessThanOrEqual;
  }
-#line 1890 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1891 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 52: /* relop: RELOP_EQ  */
-#line 238 "src/frontend/parser.y"
+#line 240 "src/frontend/parser.y"
              {
   (yyval.rel) = ASTExpressionComparisonType::Equal;
  }
-#line 1898 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1899 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 53: /* relop: RELOP_NE  */
-#line 240 "src/frontend/parser.y"
+#line 242 "src/frontend/parser.y"
              {
   (yyval.rel) = ASTExpressionComparisonType::NotEqual;
  }
-#line 1906 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1907 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 54: /* term: factor  */
-#line 243 "src/frontend/parser.y"
+#line 245 "src/frontend/parser.y"
              {(yyval.exp) = (yyvsp[0].exp);}
-#line 1912 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1913 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 55: /* term: term ARITH_PLUS factor  */
-#line 243 "src/frontend/parser.y"
+#line 245 "src/frontend/parser.y"
                                                 {
   (yyval.exp) = new ASTExpressionAddition(std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1920 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1921 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 56: /* term: term ARITH_MINUS factor  */
-#line 245 "src/frontend/parser.y"
+#line 247 "src/frontend/parser.y"
                             {
   (yyval.exp) = new ASTExpressionSubtraction(std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1928 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1929 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 57: /* factor: unary  */
-#line 248 "src/frontend/parser.y"
+#line 250 "src/frontend/parser.y"
               {(yyval.exp) = (yyvsp[0].exp);}
-#line 1934 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1935 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 58: /* factor: factor ARITH_MULT unary  */
-#line 248 "src/frontend/parser.y"
+#line 250 "src/frontend/parser.y"
                                                    {
   (yyval.exp) = new ASTExpressionMultiplication(std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1942 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1943 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 59: /* factor: factor ARITH_DIV unary  */
-#line 250 "src/frontend/parser.y"
+#line 252 "src/frontend/parser.y"
                            {
   (yyval.exp) = new ASTExpressionDivision(std::unique_ptr<ASTExpression>((yyvsp[-2].exp)), std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1950 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1951 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 60: /* factor: factor ARITH_MOD unary  */
-#line 252 "src/frontend/parser.y"
+#line 254 "src/frontend/parser.y"
                            {
   //not implemented in AST
   (yyval.exp) = (yyvsp[-2].exp);
  }
-#line 1959 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1960 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 61: /* unary: ARITH_MINUS primary  */
-#line 256 "src/frontend/parser.y"
+#line 258 "src/frontend/parser.y"
                            {
   (yyval.exp) = new ASTExpressionNegation(std::unique_ptr<ASTExpression>((yyvsp[0].exp)));
  }
-#line 1967 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1968 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 63: /* primary: ID  */
-#line 259 "src/frontend/parser.y"
+#line 261 "src/frontend/parser.y"
             {
   (yyval.exp) = new ASTExpressionVariable((yyvsp[0].strval));
  }
-#line 1975 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1976 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 64: /* primary: LPAREN expr RPAREN  */
-#line 261 "src/frontend/parser.y"
+#line 263 "src/frontend/parser.y"
                        {
   (yyval.exp) = (yyvsp[-1].exp);
  }
-#line 1983 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1984 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 65: /* primary: call  */
-#line 263 "src/frontend/parser.y"
+#line 265 "src/frontend/parser.y"
           {
   (yyval.exp) = (yyvsp[0].exp);
  }
-#line 1991 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 1992 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 66: /* primary: constant  */
-#line 265 "src/frontend/parser.y"
+#line 267 "src/frontend/parser.y"
              {
   (yyval.exp) = (yyvsp[0].exp);
  }
-#line 1999 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2000 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 67: /* call: ID LPAREN args RPAREN  */
-#line 268 "src/frontend/parser.y"
+#line 270 "src/frontend/parser.y"
                             {
   //convert args to a vector of unique ptrs:
   auto argVec = std::vector<std::unique_ptr<ASTExpression>>();
@@ -2008,56 +2009,56 @@ yyreduce:
   }
   (yyval.exp) = new ASTExpressionCall(ASTExpressionVariable::Create((yyvsp[-3].strval)), std::move(argVec));
  }
-#line 2012 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2013 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 68: /* call: ID LPAREN RPAREN  */
-#line 275 "src/frontend/parser.y"
+#line 277 "src/frontend/parser.y"
                       {
   //if there are no args, then just give it an empty vector
   (yyval.exp) = new ASTExpressionCall(ASTExpressionVariable::Create((yyvsp[-2].strval)), std::vector<std::unique_ptr<ASTExpression>>());
    }
-#line 2021 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2022 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 69: /* args: args COMMA expr  */
-#line 279 "src/frontend/parser.y"
+#line 281 "src/frontend/parser.y"
                        {
    (yyval.exprVec) = (yyvsp[-2].exprVec);
    (yyval.exprVec)->push_back((yyvsp[0].exp));
  }
-#line 2030 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2031 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 70: /* args: expr  */
-#line 282 "src/frontend/parser.y"
+#line 284 "src/frontend/parser.y"
           {
    (yyval.exprVec) = new std::vector<ASTExpression *>();
    (yyval.exprVec)->push_back((yyvsp[0].exp));
  }
-#line 2039 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2040 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 71: /* constant: int_lit  */
-#line 286 "src/frontend/parser.y"
+#line 288 "src/frontend/parser.y"
                   {(yyval.exp) = new ASTExpressionInt((yyvsp[0].intval));}
-#line 2045 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2046 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 72: /* constant: flt_lit  */
-#line 286 "src/frontend/parser.y"
+#line 288 "src/frontend/parser.y"
                                                              {(yyval.exp) = new ASTExpressionFloat((yyvsp[0].fltval));}
-#line 2051 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2052 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
   case 73: /* constant: STRING_LITERAL  */
-#line 286 "src/frontend/parser.y"
+#line 288 "src/frontend/parser.y"
                                                                                                                  {(yyval.exp) = new ASTExpressionString(std::string((yyvsp[0].strval)));}
-#line 2057 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2058 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
     break;
 
 
-#line 2061 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
+#line 2062 "/Users/roberthammond/Documents/School/Spring 2023/Compiler/PG4/cmake-build-debug-coverage/parser.tab.cc"
 
       default: break;
     }
@@ -2281,7 +2282,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 290 "src/frontend/parser.y"
+#line 292 "src/frontend/parser.y"
 
 int main(int argc, char **argv) {
 
