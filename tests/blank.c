@@ -3,7 +3,7 @@ int main() {
     int j;
     int x;
     x = 1;
-    if (x) {
+    if (1) {
         j = 2;
     }
     else {

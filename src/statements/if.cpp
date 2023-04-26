@@ -1,6 +1,7 @@
 #include "if.h"
 
 #include "../function.h"
+#include <iostream>
 
 std::unique_ptr<VarType> ASTStatementIf::StatementReturnType(ASTFunction& func)
 {
@@ -22,7 +23,18 @@ std::unique_ptr<VarType> ASTStatementIf::StatementReturnType(ASTFunction& func)
 
 void ASTStatementIf::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func)
 {
-    // Compile the condition. TODO: TO BOOLEAN CAST CONVERSION?
+    bool optimize = true;
+    if (optimize) {
+        //if always true, don't bother with the else.
+        if (condition->CompileRValue(builder, func) ==
+            llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+            thenStatement->Compile(mod, builder, func);
+            return;
+        }
+    }
+
+
+    // Compile the condition.
     ASTExpression::ImplicitCast(func, condition, &VarTypeSimple::BoolType);
     if (!condition->ReturnType(func)->Equals(&VarTypeSimple::BoolType))
         throw std::runtime_error("ERROR: Expected condition that returns a boolean value but got another type instead!");
