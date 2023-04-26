@@ -17,10 +17,10 @@ llvm::Value* ASTExpressionInt2Float::Compile(llvm::IRBuilder<>& builder, ASTFunc
         throw std::runtime_error("ERROR: Expected integer operand in int2float but got another type instead!");
 
     // Finally compile the cast, we must use an R-Value to cast (we can't just use a raw variable).
-    return builder.CreateSIToFP(operand->CompileRValue(builder, func), VarTypeSimple::FloatType.GetLLVMType(builder.getContext()));
+    return builder.CreateSIToFP(operand->CompileRValue(builder, func), VarTypeSimple::BoolType.GetLLVMType(builder.getContext()));
 }
 
 std::string ASTExpressionInt2Float::ToString(const std::string& prefix)
 {
-    return "int2Float\n" + prefix + "└──" + operand->ToString(prefix + "   ");
+    return "int2Bool\n" + prefix + "└──" + operand->ToString(prefix + "   ");
 }
