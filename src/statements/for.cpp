@@ -5,35 +5,38 @@
 
 std::unique_ptr<VarType> ASTStatementFor::StatementReturnType(ASTFunction& func)
 {
-    return nullptr;
+    return voidReturnType != nullptr ? voidReturnType->Copy() : nullptr;
 }
 
 void ASTStatementFor::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func)
 {
+    bool optimize = true;
+    if (optimize) {
+        /*
+         * TODO: Same notes about the while loop appear here.
+         */
+        if (condition->CompileRValue(builder, func) ==
+            llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+            voidReturnType = VarTypeSimple::VoidType.Copy(); //so that the function ends with this block
+            auto *funcVal = (llvm::Function *) func.GetVariableValue(func.name);
+            auto forLoop = llvm::BasicBlock::Create(builder.getContext(), "forLoop", funcVal);
+            auto forLoopEnd = llvm::BasicBlock::Create(builder.getContext(), "forLoopEnd", funcVal);
 
-    /*
+            init->Compile(builder, func);
+            builder.CreateBr(forLoop);
 
-        A while loop can be desugared to basic blocks. Take the following example:
+            builder.SetInsertPoint(forLoop);
+            stmt->Compile(mod, builder, func);
+            builder.CreateBr(forLoop);
+            builder.SetInsertPoint(forLoopEnd);
+            return;
+        }
+        else if (condition->CompileRValue(builder, func) ==
+                 llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
+            return;
+        }
 
-            while (condition)
-            {
-                doThing();
-            }
-
-        This is really just another way of saying:
-
-            whileLoop:
-                if (condition) goto whileLoopBody else goto whileLoopEnd;
-
-            whileLoopBody:
-                doThing();
-                goto whileLoop;
-
-            whileLoopEnd:
-                ...
-
-    */
-
+    }
     // Create the basic blocks.
     auto* funcVal = (llvm::Function*)func.GetVariableValue(func.name);
     auto forLoop = llvm::BasicBlock::Create(builder.getContext(), "forLoop", funcVal);

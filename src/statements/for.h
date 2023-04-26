@@ -9,6 +9,7 @@ class ASTStatementFor : public ASTStatement
     std::unique_ptr<ASTExpression> condition;
     std::unique_ptr<ASTExpression> inc;
     std::unique_ptr<ASTStatement> stmt;
+    std::unique_ptr<VarType> voidReturnType = nullptr;
 
 public:
     ASTStatementFor(std::unique_ptr<ASTExpression> init, std::unique_ptr<ASTExpression> condition, std::unique_ptr<ASTExpression> inc, std::unique_ptr<ASTStatement> stmt)
@@ -18,6 +19,7 @@ public:
     {
         return std::make_unique<ASTStatementFor>(std::move(init), std::move(condition), std::move(inc), std::move(stmt));
     }
+
 
     virtual std::unique_ptr<VarType> StatementReturnType(ASTFunction& func) override;
     virtual void Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
