@@ -36,24 +36,24 @@ void ASTStatementFor::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, AST
 
     // Create the basic blocks.
     auto* funcVal = (llvm::Function*)func.GetVariableValue(func.name);
-
     auto forLoop = llvm::BasicBlock::Create(builder.getContext(), "forLoop", funcVal);
     auto forLoopBody = llvm::BasicBlock::Create(builder.getContext(), "forLoopBody", funcVal);
     auto forLoopEnd = llvm::BasicBlock::Create(builder.getContext(), "forLoopEnd", funcVal);
 
 
-
-    // Jump to the while loop.
+    init->Compile(mod, builder, func);
     builder.CreateBr(forLoop);
 
-    // Compile condition and jump to the right block.
     builder.SetInsertPoint(forLoop);
-    init->Compile(mod, builder, func);
     auto conditionVal = condition->CompileRValue(builder, func);
     builder.CreateCondBr(conditionVal, forLoopBody, forLoopEnd);
 
-    // Compile the body. Note that we need to not create a jump if there is a return.
+    // Compile condition and jump to the right block.
+
+
     builder.SetInsertPoint(forLoopBody);
+
+    // Compile the body. Note that we need to not create a jump if there is a return.
     stmt->Compile(mod, builder, func);
     inc->Compile(mod, builder, func);
     if (!stmt->StatementReturnType(func)) builder.CreateBr(forLoop);
@@ -67,7 +67,9 @@ void ASTStatementFor::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, AST
 std::string ASTStatementFor::ToString(const std::string& prefix)
 {
     std::string output = "for\n";
+    output += prefix + "├──" + init->ToString(prefix + "│  ");
     output += prefix + "├──" + condition->ToString(prefix + "│  ");
+    output += prefix + "├──" + inc->ToString(prefix + "│  ");
     output += prefix + "└──" + stmt->ToString(prefix + "   ");
     return output;
 }
