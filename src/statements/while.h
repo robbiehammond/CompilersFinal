@@ -13,6 +13,8 @@ class ASTStatementWhile : public ASTStatement
     // Then statement to execute.
     std::unique_ptr<ASTStatement> thenStatement;
 
+    std::unique_ptr<VarType> voidReturnType = nullptr;
+
 public:
 
     // Create a new while statement.

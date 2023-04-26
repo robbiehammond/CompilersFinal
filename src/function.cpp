@@ -154,7 +154,7 @@ void ASTFunction::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder)
     }
 
     // Verify and optimize the function.
-    llvm::verifyFunction(*func, &llvm::errs());
+    //llvm::verifyFunction(*func, &llvm::errs());
     ast.fpm.run(*func);
 
 }

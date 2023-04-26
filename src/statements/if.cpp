@@ -23,7 +23,7 @@ std::unique_ptr<VarType> ASTStatementIf::StatementReturnType(ASTFunction& func)
 
 void ASTStatementIf::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func)
 {
-    bool optimize = true;
+    bool optimize = false;
     if (optimize) {
         //if always true, don't bother with the else.
         if (condition->CompileRValue(builder, func) ==
@@ -39,7 +39,6 @@ void ASTStatementIf::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTF
             return;
         }
     }
-
 
     // Compile the condition.
     ASTExpression::ImplicitCast(func, condition, &VarTypeSimple::BoolType);

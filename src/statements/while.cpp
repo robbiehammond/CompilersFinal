@@ -5,13 +5,36 @@
 std::unique_ptr<VarType> ASTStatementWhile::StatementReturnType(ASTFunction& func)
 {
 
+    return voidReturnType != nullptr ? voidReturnType->Copy() : nullptr;
     // It is completely possible for a while's condition to never be true, so even if does return something it's not confirmed.
-    return nullptr;
+    //return nullptr;
 
 }
 
 void ASTStatementWhile::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func)
 {
+    bool optimize = true;
+    if (optimize) {
+        voidReturnType = VarTypeSimple::VoidType.Copy();
+        //if always true, don't both with anything afterwards.
+        /*
+         * TODO: check if the function is void first and only optimize void ones so we don't need to fuck with types.
+         * If we have time, we can make it so the return type is just something that matches the return of the function.
+         * So if it's int, just return 0 or something. If it's bool, just return false, etc. It'll never actually be
+         * returned, so it doesn't matter.
+         */
+        if (condition->CompileRValue(builder, func) ==
+            llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+            auto* funcVal = (llvm::Function*)func.GetVariableValue(func.name);
+            auto whileLoop = llvm::BasicBlock::Create(builder.getContext(), "whileLoop", funcVal);
+            auto whileLoopEnd = llvm::BasicBlock::Create(builder.getContext(), "whileLoopEnd", funcVal);
+            builder.SetInsertPoint(whileLoop);
+            thenStatement->Compile(mod, builder, func);
+            builder.CreateBr(whileLoop);
+            builder.SetInsertPoint(whileLoopEnd);
+            return;
+        }
+    }
 
     /*
 
