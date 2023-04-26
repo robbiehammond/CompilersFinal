@@ -15,7 +15,6 @@ void ASTStatementWhile::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
 {
     bool optimize = true;
     if (optimize) {
-        voidReturnType = VarTypeSimple::VoidType.Copy();
         //if always true, don't both with anything afterwards.
         /*
          * TODO: check if the function is void first and only optimize void ones so we don't need to fuck with types.
@@ -25,6 +24,7 @@ void ASTStatementWhile::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
          */
         if (condition->CompileRValue(builder, func) ==
             llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+            voidReturnType = VarTypeSimple::VoidType.Copy(); //so that the function ends with this block
             auto* funcVal = (llvm::Function*)func.GetVariableValue(func.name);
             auto whileLoop = llvm::BasicBlock::Create(builder.getContext(), "whileLoop", funcVal);
             auto whileLoopEnd = llvm::BasicBlock::Create(builder.getContext(), "whileLoopEnd", funcVal);
@@ -32,6 +32,12 @@ void ASTStatementWhile::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
             thenStatement->Compile(mod, builder, func);
             builder.CreateBr(whileLoop);
             builder.SetInsertPoint(whileLoopEnd);
+            return;
+        }
+
+        //if always false, don't generate the code inside or the loop at all.
+        else if (condition->CompileRValue(builder, func) ==
+            llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
             return;
         }
     }

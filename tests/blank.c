@@ -16,8 +16,9 @@ int main() {
 void main2() {
     int i;
     int j;
-    while (1) {
+    while (0) {
         i = 3;
     }
     j = 2;
+    i = 5;
 }
