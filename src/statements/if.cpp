@@ -31,6 +31,13 @@ void ASTStatementIf::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTF
             thenStatement->Compile(mod, builder, func);
             return;
         }
+
+        //if always false, don't bother with the then.
+        else if (condition->CompileRValue(builder, func) ==
+                 llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
+            elseStatement->Compile(mod, builder, func);
+            return;
+        }
     }
 
 
