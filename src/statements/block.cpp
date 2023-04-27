@@ -38,7 +38,6 @@ void ASTStatementBlock::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
     for (auto& statement : statements)
     {
         statement->Compile(mod, builder, func);
-        if (statement->ignore) return;
         if (statement->StatementReturnType(func)) return;
     }
 

@@ -28,6 +28,7 @@ void ASTStatementWhile::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
             auto* funcVal = (llvm::Function*)func.GetVariableValue(func.name);
             auto whileLoop = llvm::BasicBlock::Create(builder.getContext(), "whileLoop", funcVal);
             auto whileLoopEnd = llvm::BasicBlock::Create(builder.getContext(), "whileLoopEnd", funcVal);
+            builder.CreateBr(whileLoop);
             builder.SetInsertPoint(whileLoop);
             thenStatement->Compile(mod, builder, func);
             builder.CreateBr(whileLoop);

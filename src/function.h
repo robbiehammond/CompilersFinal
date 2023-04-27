@@ -45,6 +45,7 @@ public:
     // Function type.
     std::unique_ptr<VarTypeFunction> funcType;
 
+    std::vector<std::string> assignedVariables;
     // Create a new function. Will automatically be added to the AST's scope table.
     // ast: AST to link to. Will be added to its scope table.
     // name: Name of the function to create.

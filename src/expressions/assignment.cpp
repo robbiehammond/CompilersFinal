@@ -1,4 +1,5 @@
 #include "assignment.h"
+#include "function.h"
 #include <iostream>
 
 std::unique_ptr<VarType> ASTExpressionAssignment::ReturnType(ASTFunction& func)
@@ -23,6 +24,7 @@ llvm::Value* ASTExpressionAssignment::Compile(llvm::IRBuilder<>& builder, ASTFun
 
     // Store the right value into the position pointed to by the left and return the left pointer.
     builder.CreateStore(right->CompileRValue(builder, func), ptr);
+
     return ptr;
 
 }

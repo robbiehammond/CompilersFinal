@@ -11,7 +11,6 @@ class ASTFunction;
 class ASTStatement
 {
 public:
-    bool ignore = false;
     // Get the return type of the statement.
     // func: Current AST function.
     // Returns: Either a return type if a return statement is definitive, or nullptr if there is none.
