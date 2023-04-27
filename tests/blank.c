@@ -27,7 +27,7 @@ void main3() {
     int i;
     int j;
     int k;
-    for (i = 0; 0; i = i + 1) {
+    for (i = 0; i < 5; i = i + 1) {
         j = j + 1;
     }
     k = 5;

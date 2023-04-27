@@ -27,7 +27,10 @@ llvm::Value* ASTExpressionComparison::Compile(llvm::IRBuilder<>& builder, ASTFun
         {
             case Equal: return builder.CreateCmp(llvm::CmpInst::ICMP_EQ, a1Val, a2Val);
             case NotEqual: return builder.CreateCmp(llvm::CmpInst::ICMP_NE, a1Val, a2Val);
-            // Hm, some of these cases in these functions appear to be missing...
+            case GreaterThan: return builder.CreateCmp(llvm::CmpInst::ICMP_SGT, a1Val, a2Val);
+            case LessThan: return builder.CreateCmp(llvm::CmpInst::ICMP_SLT, a1Val, a2Val);
+            case GreaterThanOrEqual: return builder.CreateCmp(llvm::CmpInst::ICMP_SGE, a1Val, a2Val);
+            case LessThanOrEqual: return builder.CreateCmp(llvm::CmpInst::ICMP_SLE, a1Val, a2Val);
         }
     }
 
@@ -38,6 +41,10 @@ llvm::Value* ASTExpressionComparison::Compile(llvm::IRBuilder<>& builder, ASTFun
         {
             case Equal: return builder.CreateCmp(llvm::CmpInst::FCMP_OEQ, a1Val, a2Val); // Use ordered operations to not allow NANS.
             case NotEqual: return builder.CreateCmp(llvm::CmpInst::FCMP_ONE, a1Val, a2Val);
+            case GreaterThan: return builder.CreateCmp(llvm::CmpInst::FCMP_OGT, a1Val, a2Val);
+            case LessThan: return builder.CreateCmp(llvm::CmpInst::FCMP_OLT, a1Val, a2Val);
+            case GreaterThanOrEqual: return builder.CreateCmp(llvm::CmpInst::FCMP_OGE, a1Val, a2Val);
+            case LessThanOrEqual: return builder.CreateCmp(llvm::CmpInst::FCMP_OLE, a1Val, a2Val);
         }
     }
 
