@@ -43,8 +43,15 @@ void ASTStatementBlock::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
 }
 
 bool ASTStatementBlock::Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
-    for (auto& statement : statements) {
-        statement->Optimize(mod, builder, func);
+    for (int i = 0; i < statements.size(); i++) {
+        auto& statement = statements[i];
+        if (statement->Optimize(mod, builder, func)) {
+
+            // continue to insert code to replace FOR block
+            statements.erase(statements.begin() + i);
+            statements.push_back(std::unique_ptr<ASTStatement>(new ASTStatementBlock()));
+            //std::cout << "remove me"  << std::endl;
+        }
     }
 }
 

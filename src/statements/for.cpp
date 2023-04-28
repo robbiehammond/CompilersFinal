@@ -78,9 +78,11 @@ std::string ASTStatementFor::ToString(const std::string& prefix)
 }
 
 bool ASTStatementFor::Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
-    if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
-        std::cout << "we can optimize the for loop"  << std::endl;
+    //TODO catch errors. Don't optimize if one arises.
+    if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
     }
+
+
     return true;
 }
 
