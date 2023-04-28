@@ -1,6 +1,7 @@
 #include "for.h"
 
 #include "../function.h"
+#include <iostream>
 //This whole file needs to be fixed.
 
 std::unique_ptr<VarType> ASTStatementFor::StatementReturnType(ASTFunction& func)
@@ -64,7 +65,6 @@ void ASTStatementFor::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, AST
 
     // Continue from the end of the created while loop.
     builder.SetInsertPoint(forLoopEnd);
-
 }
 
 std::string ASTStatementFor::ToString(const std::string& prefix)
@@ -76,3 +76,12 @@ std::string ASTStatementFor::ToString(const std::string& prefix)
     output += prefix + "└──" + stmt->ToString(prefix + "   ");
     return output;
 }
+
+bool ASTStatementFor::Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+    if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+        std::cout << "we can optimize the for loop"  << std::endl;
+    }
+    return true;
+}
+
+

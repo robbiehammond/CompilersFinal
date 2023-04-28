@@ -24,4 +24,5 @@ public:
     virtual std::unique_ptr<VarType> StatementReturnType(ASTFunction& func) override;
     virtual void Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
     virtual std::string ToString(const std::string& prefix) override;
+    virtual bool Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
 };  

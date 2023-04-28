@@ -93,8 +93,16 @@ ASTFunction* AST::GetFunction(const std::string& name)
 
 }
 
+void AST::Optimize() {
+    for (auto& func : functionList) {
+        functions[func]->PerformOptimization(module, builder);
+    }
+}
+
 void AST::Compile()
 {
+
+    Optimize();
     // All we need to do is compile each function.
     for (auto& func : functionList)
     {

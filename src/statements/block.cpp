@@ -40,7 +40,12 @@ void ASTStatementBlock::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
         statement->Compile(mod, builder, func);
         if (statement->StatementReturnType(func)) return;
     }
+}
 
+bool ASTStatementBlock::Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+    for (auto& statement : statements) {
+        statement->Optimize(mod, builder, func);
+    }
 }
 
 std::string ASTStatementBlock::ToString(const std::string& prefix)

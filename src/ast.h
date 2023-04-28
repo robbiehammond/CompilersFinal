@@ -84,4 +84,5 @@ public:
     // outFile: Where to write the .bc file.
     void WriteLLVMBitcodeToFile(const std::string& outFile);
 
+    void Optimize();
 };

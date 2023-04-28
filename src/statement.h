@@ -30,4 +30,8 @@ public:
 
     // Must make the destructor virtual to make the compiler happy.
     virtual ~ASTStatement() = default;
+
+    virtual bool Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+        return false;
+    }
 };

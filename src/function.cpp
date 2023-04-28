@@ -159,6 +159,10 @@ void ASTFunction::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder)
 
 }
 
+void ASTFunction::PerformOptimization(llvm::Module& mod, llvm::IRBuilder<>& builder) {
+    definition->Optimize(mod, builder, *this);
+}
+
 std::string ASTFunction::ToString(const std::string& prefix)
 {
     std::string output = name + "\n";

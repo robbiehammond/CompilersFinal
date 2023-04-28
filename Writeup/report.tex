@@ -220,15 +220,28 @@ be able to remove unused variables.
 In this section, we will outline how we implemented the aforementioned code removal functionality. 
 
 \subsection{If Statements}
-We checked the if condition, if the compiled R value was 0, remove the if. If the compiled R value was 1, 
-remove the else. Make this sound more compilcated and smart.
+There are two cases in which a branch of an if statement will never run. The first case is when the condition 
+is always true, regardless of the state of the program when the if statement is entered. The second case is when 
+the condition is always false.
 
-\subsection{While Loops}
-We checked the condition, if the compiled R value was 0, don't generate a loop at all. If the compiled R value was 1, 
-Generate the loop, but heavily shorten the code after it. Make this sound more compilcated and smart.
+\subsubsection{Condition always true}
+To check if the condition is always true, we get the compiled R value of the condition. If it is 1, then we know that 
+the condition must always be true. When this happens, we don't need to generate any kind of branch logic in the LLVM IR.
+All we must do is generate the code within the else statement and generate the rest of the program like normal. Refer to 
+the first portion of the Compile function in if.cpp to see percisely how this was implemented.
 
-\subsection{For Loops}
-Pretty much the same as the while loop. 
+\subsubsection{Condition always true}
+To check if the condition is always false, we get the compiled R value of the condition as in the other case. If it is 0, then we know that 
+the condition must always be false. Similarly to the case when the condition is always true, all we must do is generate the code within 
+the then statement with no branching logic. Again, refer to the first portion of the Compile function in if.cpp to see percisely how this was implemented.
+
+\subsection{Loops (For and While)}
+Just like with the if statements, there are two cases in which a loop may cause dead code. The first case is when the condition 
+is always true, and the second case is when the condition is always false.
+
+\subsubsection{Condition always true}
+Just like with if statements, we can check if the condition is always true by checking the compiled R value of the condition.
+If it is, then we know that the loop will never terminate, rendering the subsequent code unreachable. To shorten the 
 
 \subsection{Useless Variables}
 Hopefully we can get this implemented and talk about it. Worst case, we can just talk about things we considered 
