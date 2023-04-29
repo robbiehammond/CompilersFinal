@@ -19,12 +19,13 @@ void infiniteWhileTest() {
     i = 5;
 }
 
-void main3() {
+int main3() {
     int i;
     int j;
     int k;
-    for (i = 0; i < 5; i = i + 1) {
+    for (i = 0; 1; i = i + 1) {
         j = j + 1;
     }
     k = 5;
+    return k;
 }

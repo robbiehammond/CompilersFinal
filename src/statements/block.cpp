@@ -1,7 +1,10 @@
 #include "block.h"
-
+#include "return.h"
+#include "expressions/bool.h"
 #include "../function.h"
 #include "../types/simple.h"
+#include "expressions/int.h"
+#include "expressions/float.h"
 
 #include <iostream>
 
@@ -48,10 +51,42 @@ bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
         if (statement->CanOptimize(mod, builder, func)) {
 
             Optimization opt = statement->howToOptimize(mod, builder, func);
+
+            //loop never runs
             if (opt == REMOVE_LOOP) {
                 statements.erase(statements.begin() + i);
             }
+
+            //loop always runs
             else if (opt == REMOVE_POST_LOOP) {
+                for (int j = i + 1; j < statements.size(); j++) {
+                    std::cout << statements[j]->ToString("") << std::endl;
+                    statements.erase(statements.begin() + j);
+                }
+
+                auto returnType = StatementReturnType(func);
+
+                //get rid of old return
+                if (!statements.empty()) {
+                    statements.pop_back();
+                }
+
+                auto returnStmt = new ASTStatementReturn();
+
+                //add for others.
+                if (returnType->Equals(&VarTypeSimple::IntType)) {
+                    returnStmt->returnExpression = std::unique_ptr<ASTExpression>(new ASTExpressionInt(1));
+                }
+                else if (returnType->Equals(&VarTypeSimple::BoolType)) {
+                    returnStmt->returnExpression = std::unique_ptr<ASTExpression>(new ASTExpressionBool(0));
+                }
+                else if (returnType->Equals(&VarTypeSimple::VoidType)) {
+                    returnStmt->returnExpression = std::unique_ptr<ASTExpression>(nullptr);
+                }
+                else if (returnType->Equals(&VarTypeSimple::FloatType)) {
+                    returnStmt->returnExpression = std::unique_ptr<ASTExpression>(new ASTExpressionFloat(0));
+                }
+                statements.push_back(std::unique_ptr<ASTStatementReturn>(returnStmt));
 
             }
             else if (opt == REMOVE_THEN) {

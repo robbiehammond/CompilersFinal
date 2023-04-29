@@ -5,13 +5,13 @@
 
 class ASTStatementFor : public ASTStatement
 {
+    std::unique_ptr<VarType> voidReturnType = nullptr;
+
+public:
     std::unique_ptr<ASTExpression> init;
     std::unique_ptr<ASTExpression> condition;
     std::unique_ptr<ASTExpression> inc;
     std::unique_ptr<ASTStatement> stmt;
-    std::unique_ptr<VarType> voidReturnType = nullptr;
-
-public:
     ASTStatementFor(std::unique_ptr<ASTExpression> init, std::unique_ptr<ASTExpression> condition, std::unique_ptr<ASTExpression> inc, std::unique_ptr<ASTStatement> stmt)
     : init(std::move(init)), condition(std::move(condition)), inc(std::move(inc)), stmt(std::move(stmt)) {}
 
