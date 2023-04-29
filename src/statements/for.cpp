@@ -11,11 +11,9 @@ std::unique_ptr<VarType> ASTStatementFor::StatementReturnType(ASTFunction& func)
 
 void ASTStatementFor::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func)
 {
+    /*
     bool optimize = true;
     if (optimize) {
-        /*
-         * TODO: Same notes about the while loop appear here.
-         */
         if (condition->CompileRValue(builder, func) ==
             llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
             voidReturnType = VarTypeSimple::VoidType.Copy(); //so that the function ends with this block
@@ -38,6 +36,7 @@ void ASTStatementFor::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, AST
         }
 
     }
+    */
     // Create the basic blocks.
     auto* funcVal = (llvm::Function*)func.GetVariableValue(func.name);
     auto forLoop = llvm::BasicBlock::Create(builder.getContext(), "forLoop", funcVal);
@@ -77,13 +76,36 @@ std::string ASTStatementFor::ToString(const std::string& prefix)
     return output;
 }
 
-bool ASTStatementFor::Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
-    //TODO catch errors. Don't optimize if one arises.
+bool ASTStatementFor::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+    try {
+        if (condition->CompileRValue(builder, func) ==
+            llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)
+            || condition->CompileRValue(builder, func) ==
+               llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+            return true;
+        }
+        else
+            return false;
+    }
+    //if we can't resolve a variable or anything, just say we can't optimize.
+    catch (std::runtime_error& e) {
+        return false;
+    }
+}
+
+Optimization ASTStatementFor::howToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func) {
     if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
+        return REMOVE_LOOP;
+    }
+    else if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+        return REMOVE_POST_LOOP;
+    }
+    else {
+        return NO_OPTIM;
     }
 
-
-    return true;
 }
+
+
 
 

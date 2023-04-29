@@ -1,6 +1,7 @@
 #pragma once
 
 #include "varType.h"
+#include "optimization.h"
 #include <llvm/IR/IRBuilder.h>
 #include <llvm/IR/Value.h>
 
@@ -31,7 +32,11 @@ public:
     // Must make the destructor virtual to make the compiler happy.
     virtual ~ASTStatement() = default;
 
-    virtual bool Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+    virtual bool CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
         return false;
+    }
+
+    virtual Optimization howToOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+        return NO_OPTIM;
     }
 };

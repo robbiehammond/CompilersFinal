@@ -42,14 +42,31 @@ void ASTStatementBlock::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
     }
 }
 
-bool ASTStatementBlock::Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
     for (int i = 0; i < statements.size(); i++) {
         auto& statement = statements[i];
-        if (statement->Optimize(mod, builder, func)) {
+        if (statement->CanOptimize(mod, builder, func)) {
 
+            Optimization opt = statement->howToOptimize(mod, builder, func);
+            if (opt == REMOVE_LOOP) {
+                statements.erase(statements.begin() + i);
+            }
+            else if (opt == REMOVE_POST_LOOP) {
+
+            }
+            else if (opt == REMOVE_THEN) {
+
+            }
+            else if (opt == REMOVE_ELSE) {
+
+            }
+            /*
+             * TODO: Change return of CanOptimize to be an enum containing a number of things to indicate what to do
+             * (i.e. erase inner, erase after, etc).
+             */
             // continue to insert code to replace FOR block
-            statements.erase(statements.begin() + i);
-            statements.push_back(std::unique_ptr<ASTStatement>(new ASTStatementBlock()));
+            //statements.erase(statements.begin() + i);
+            //statements.push_back(std::unique_ptr<ASTStatement>(new ASTStatementBlock()));
             //std::cout << "remove me"  << std::endl;
         }
     }

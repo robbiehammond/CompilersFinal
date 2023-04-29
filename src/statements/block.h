@@ -18,5 +18,5 @@ public:
     void RemoveAfterReturn(ASTFunction& func);
 
 
-    bool Optimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
+    bool CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
 };
