@@ -9,7 +9,7 @@ int main() {
     return x;
 }
 
-void infiniteWhileTest() {
+int infiniteWhileTest() {
     int i;
     int j;
     while (1) {
@@ -17,6 +17,7 @@ void infiniteWhileTest() {
     }
     j = 2;
     i = 5;
+    return 0;
 }
 
 int main3() {

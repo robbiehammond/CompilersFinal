@@ -59,17 +59,15 @@ bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
 
             //loop always runs
             else if (opt == REMOVE_POST_LOOP) {
-                for (int j = i + 1; j < statements.size(); j++) {
+
+                auto returnType = StatementReturnType(func);
+                //size goes down by 1 each time, j will eventaully be >= statements.size()
+                for (int j = i + 1; j < statements.size(); ) {
                     std::cout << statements[j]->ToString("") << std::endl;
                     statements.erase(statements.begin() + j);
                 }
 
-                auto returnType = StatementReturnType(func);
 
-                //get rid of old return
-                if (!statements.empty()) {
-                    statements.pop_back();
-                }
 
                 auto returnStmt = new ASTStatementReturn();
 
