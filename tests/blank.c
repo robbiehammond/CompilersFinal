@@ -2,10 +2,13 @@ int main() {
     int i;
     int j;
     int x;
-    i = 3;
-    if (x == 2) {
+    if (1) {
         j = 3;
     }
+    else {
+        j = 2;
+    }
+    i = 3;
     return x;
 }
 

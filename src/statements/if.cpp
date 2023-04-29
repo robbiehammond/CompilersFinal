@@ -73,6 +73,42 @@ void ASTStatementIf::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTF
     builder.SetInsertPoint(contBlock);
 }
 
+bool ASTStatementIf::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+    try {
+        if (condition->CompileRValue(builder, func) ==
+            llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)
+            || condition->CompileRValue(builder, func) ==
+               llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+            return true;
+        }
+        else
+            return false;
+    }
+        //if we can't resolve a variable or anything, just say we can't optimize.
+    catch (std::runtime_error& e) {
+        return false;
+    }
+}
+
+Optimization ASTStatementIf::howToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func) {
+    if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
+        optimData = std::move(elseStatement);
+        return REMOVE_THEN;
+    }
+    else if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 1)) {
+        optimData = std::move(thenStatement);
+        return REMOVE_ELSE;
+    }
+    else {
+        optimData = std::move(nullptr);
+        return NO_OPTIM;
+    }
+}
+
+std::unique_ptr<ASTStatement> ASTStatementIf::getOptimizationData() {
+    return std::move(optimData);
+}
+
 std::string ASTStatementIf::ToString(const std::string& prefix)
 {
     std::string output = "if " + condition->ToString("") + "\n";

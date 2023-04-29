@@ -63,11 +63,8 @@ bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
                 auto returnType = StatementReturnType(func);
                 //size goes down by 1 each time, j will eventaully be >= statements.size()
                 for (int j = i + 1; j < statements.size(); ) {
-                    std::cout << statements[j]->ToString("") << std::endl;
                     statements.erase(statements.begin() + j);
                 }
-
-
 
                 auto returnStmt = new ASTStatementReturn();
 
@@ -85,13 +82,17 @@ bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
                     returnStmt->returnExpression = std::unique_ptr<ASTExpression>(new ASTExpressionFloat(0));
                 }
                 statements.push_back(std::unique_ptr<ASTStatementReturn>(returnStmt));
-
             }
-            else if (opt == REMOVE_THEN) {
 
+            else if (opt == REMOVE_THEN) {
+                auto thenStmt = statement->getOptimizationData();
+                statements.erase(statements.begin() + i);
+                statements.insert(statements.begin() + i, std::move(thenStmt));
             }
             else if (opt == REMOVE_ELSE) {
-
+                auto elseStmt = statement->getOptimizationData();
+                statements.erase(statements.begin() + i);
+                statements.insert(statements.begin() + i, std::move(elseStmt));
             }
             /*
              * TODO: Change return of CanOptimize to be an enum containing a number of things to indicate what to do

@@ -7,6 +7,8 @@
 class ASTStatementIf : public ASTStatement
 {
 
+
+public:
     // Condition to check.
     std::unique_ptr<ASTExpression> condition;
 
@@ -16,7 +18,7 @@ class ASTStatementIf : public ASTStatement
     // Else statement to execute.
     std::unique_ptr<ASTStatement> elseStatement;
 
-public:
+    std::unique_ptr<ASTStatement> optimData;
 
     // Create a new if statement.
     // condition: Condition to check.
@@ -38,4 +40,9 @@ public:
     virtual void Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
     virtual std::string ToString(const std::string& prefix) override;
 
+    bool CanOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func);
+
+    Optimization howToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func);
+
+    std::unique_ptr<ASTStatement> getOptimizationData();
 };

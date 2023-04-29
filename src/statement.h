@@ -39,4 +39,8 @@ public:
     virtual Optimization howToOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
         return NO_OPTIM;
     }
+
+    virtual std::unique_ptr<ASTStatement> getOptimizationData() {
+        return nullptr;
+    }
 };
