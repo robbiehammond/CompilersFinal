@@ -45,7 +45,22 @@ void ASTStatementBlock::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
     }
 }
 
+/* CanOptimize is kinda a weird name for this function because this function actually just
+ * optimizes the statements within the block, but it makes calling things recursively easy.
+ */
 bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+    //remove adjacent statements that are exactly the same
+    //This would fail if there are problems with the ToString() function,
+    //but we're gonna make the assumption that the ToString representation
+    //of two different functions are different.
+    //Ig it's worth knowing that this'll remove any identical adjacent statements,
+    //while may not be wanted at times. In the writeup we can mention that we
+    //could try to limit this to just assign statements or something like that.
+    for (int i = 0; i < statements.size() - 1; i++) {
+        if (statements[i]->ToString("") == statements[i + 1]->ToString("")) {
+            statements.erase(statements.begin() + i);
+        }
+    }
     for (int i = 0; i < statements.size(); i++) {
         auto& statement = statements[i];
         if (statement->CanOptimize(mod, builder, func)) {
@@ -104,6 +119,7 @@ bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
             //std::cout << "remove me"  << std::endl;
         }
     }
+    return false;
 }
 
 std::string ASTStatementBlock::ToString(const std::string& prefix)
