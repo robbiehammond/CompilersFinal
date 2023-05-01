@@ -115,7 +115,7 @@ bool ASTStatementWhile::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
     }
 }
 
-Optimization ASTStatementWhile::howToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func) {
+Optimization ASTStatementWhile::HowToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func) {
     if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
         return REMOVE_LOOP;
     }

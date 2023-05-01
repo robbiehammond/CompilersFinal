@@ -56,16 +56,19 @@ bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
     //Ig it's worth knowing that this'll remove any identical adjacent statements,
     //while may not be wanted at times. In the writeup we can mention that we
     //could try to limit this to just assign statements or something like that.
-    for (int i = 0; i < statements.size() - 1; i++) {
+    for (int i = 0; i < statements.size() - 1; ) {
         if (statements[i]->ToString("") == statements[i + 1]->ToString("")) {
             statements.erase(statements.begin() + i);
+        }
+        else {
+            i++;
         }
     }
     for (int i = 0; i < statements.size(); i++) {
         auto& statement = statements[i];
         if (statement->CanOptimize(mod, builder, func)) {
 
-            Optimization opt = statement->howToOptimize(mod, builder, func);
+            Optimization opt = statement->HowToOptimize(mod, builder, func);
 
             //loop never runs
             if (opt == REMOVE_LOOP) {

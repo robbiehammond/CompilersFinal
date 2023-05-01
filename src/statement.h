@@ -36,7 +36,7 @@ public:
         return false;
     }
 
-    virtual Optimization howToOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
+    virtual Optimization HowToOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) {
         return NO_OPTIM;
     }
 

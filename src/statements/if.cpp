@@ -90,7 +90,7 @@ bool ASTStatementIf::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, 
     }
 }
 
-Optimization ASTStatementIf::howToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func) {
+Optimization ASTStatementIf::HowToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func) {
     if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
         optimData = std::move(elseStatement);
         return REMOVE_THEN;

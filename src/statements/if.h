@@ -42,7 +42,7 @@ public:
 
     bool CanOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func);
 
-    Optimization howToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func);
+    Optimization HowToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func);
 
     std::unique_ptr<ASTStatement> getOptimizationData();
 };

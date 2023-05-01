@@ -67,7 +67,7 @@ bool ASTStatementFor::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder,
     }
 }
 
-Optimization ASTStatementFor::howToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func) {
+Optimization ASTStatementFor::HowToOptimize(llvm::Module &mod, llvm::IRBuilder<> &builder, ASTFunction &func) {
     if (condition->CompileRValue(builder, func) == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0)) {
         return REMOVE_LOOP;
     }

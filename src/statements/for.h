@@ -25,5 +25,5 @@ public:
     virtual void Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
     virtual std::string ToString(const std::string& prefix) override;
     virtual bool CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
-    virtual Optimization howToOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
+    virtual Optimization HowToOptimize(llvm::Module& mod, llvm::IRBuilder<>& builder, ASTFunction& func) override;
 };  

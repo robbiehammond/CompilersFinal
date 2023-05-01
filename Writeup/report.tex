@@ -214,40 +214,100 @@ For example, a function that is never written to or read from can be considered 
 Our project focuses on adding basic dead code elimination strategies into the compiler 
 created in the fourth class project. Our goal is to give the compiler support for eliminating
 unreachable code in if branches, for loops, and while loops. In addition, the compiler should 
-be able to remove unused variables.
+be able to remove unused variables and other miscellaneous dead code optimizations. 
 
 \section{Implementation}
-In this section, we will outline how we implemented the aforementioned code removal functionality. 
+In this section, we will outline how we implemented the aforementioned code removal functionality.
+
+\subsection{Class and Function Additions}
+In order to implement our optimization pass, a number of additional functions and classes had to be created.
+This section will give an outline of the important modifications, omitting many details and less important additions.
+
+\subsubsection{AST.cpp and function.cpp Changes}
+The creation of the Optimize() function is the most important change to the AST class. The Optimize() function simple 
+calls PerformOptimization() on each function. The PerformOptimization() function calls CanOptimize(), which is a function 
+that both optimizes a statement and returns it's ability to be optimized. This function is described in more detail in the 
+subsequent sections.
+
+\subsubsection{Statement.h Changes}
+Within the Statement.h file, a number of additional functions have been declared, with the most important being 
+CanOptimize() and HowToOptimize(). The purpose of these functions are relatively self-explanatory. CanOptimize()
+returns if a statement is able to be optimized. For most types of statements, we do not try to optimize them,
+so the function returns false by default. HowToOptimize() tells the rest of the program what must be done to optimize 
+the statement. HowToOptimize() returns an $Optimization$, which is an enum with values such as $REMOVE\_LOOP$, $REMOVE\_ELSE$, $NO\_OPTIM$,
+and others. 
+
+\subsubsection{Block.cpp Changes}
+The CanOptimize() function within Block.cpp is where much of the important optimization work is done.
+As mentioned above, CanOptimize() is defined with Statement.h and child classes inherit and can override this function.
+Though all other subclasses of statement simply return a true or false value from the function, the CanOptimize() function 
+in Block.cpp will modify the state of the containing block class to reflect the optimization changes. Generally speaking, 
+these state changes are the creation and/or deletion of statements within the statements list.
 
 \subsection{If Statements}
 There are two cases in which a branch of an if statement will never run. The first case is when the condition 
 is always true, regardless of the state of the program when the if statement is entered. The second case is when 
 the condition is always false.
 
-\subsubsection{Condition always true}
+\subsubsection{Condition Always True}
 To check if the condition is always true, we get the compiled R value of the condition. If it is 1, then we know that 
-the condition must always be true. When this happens, we don't need to generate any kind of branch logic in the LLVM IR.
-All we must do is generate the code within the else statement and generate the rest of the program like normal. Refer to 
-the first portion of the Compile function in if.cpp to see percisely how this was implemented.
+the condition must always be true. When this happens, we don't need to have any kind of branching logic in the AST.
+All we must do is generate the code within the else statement and generate the rest of the program like normal. 
 
-\subsubsection{Condition always true}
+\subsubsection{Condition Always True}
 To check if the condition is always false, we get the compiled R value of the condition as in the other case. If it is 0, then we know that 
 the condition must always be false. Similarly to the case when the condition is always true, all we must do is generate the code within 
-the then statement with no branching logic. Again, refer to the first portion of the Compile function in if.cpp to see percisely how this was implemented.
+the then statement with no branching logic. 
 
-\subsection{Loops (For and While)}
+\subsection{Loops (For And While)}
 Just like with the if statements, there are two cases in which a loop may cause dead code. The first case is when the condition 
 is always true, and the second case is when the condition is always false.
 
-\subsubsection{Condition always true}
+\subsubsection{Condition Always True}
 Just like with if statements, we can check if the condition is always true by checking the compiled R value of the condition.
-If it is, then we know that the loop will never terminate, rendering the subsequent code unreachable. To shorten the 
+If it is, then we know that the loop will never terminate, rendering the subsequent code unreachable. To simplify the AST, we can 
+simply get rid of all subsequent statements after the loop. For consistency sake, a return statement is still appended at the end of the loop,
+with the return type matching that of the function. Since the code is unreachable, the value of the return is not important, and arbitrary simple 
+ones were chosen.
+
+\subsubsection{Condition Always False}
+If the compiled R value of the condition is always false, there is no need to include the loop at all within the AST or LLVM IR. 
+As such, the entire loop is erased within the AST, with the rest of the code being left unaffected.
 
 \subsection{Useless Variables}
 Hopefully we can get this implemented and talk about it. Worst case, we can just talk about things we considered 
 and stuff we tried.
 
+\subsection{Other Optimizations}
+An additional simple dead code elimination technique is to eliminate adjacent statements.
+For example, if the statement $x = 1$ is directly followed by $x = 1$, one of these statements can be removed with 
+no effect on the code.
+
+\section{Major Limitations}
+There still is a large number of limitations with our optimization pass. This section will outline some of the 
+most critical ones.
+
+\subsubsection{Return/break statements within infinite loops}
+An infinite loop is not really infinite if there exists a reachable jumping statement within it. 
+Our optimization is not able to recognize this, so as long as the condition is always true, it assumes 
+the following code is unreachable. 
+
+\subsubsection{Resolving more complicated conditions (specifically in regard to the AST)}
+Our optimization pass can only recognize conditions as always being true or false when the condition is either a 
+'0' or '1'. Obviously, this is very much limiting, as most conditions that are always true/false aren't so 
+obvious. However, it is worth noting that code has been written that allows IR to not be generated for slightly less 
+trivial conditions, such as when a variable is assigned to 0 and then used in the condition. 
+Since the optimization pass is only supposed to operate on the AST, this logic has been commented out. See for.cpp, while.cpp, and 
+if.cpp for how this is done.
+
+
 \section{Testing Methodology}
+To test our optimization pass, a number of simple tests were created. The main metric 
+we decided to use to determine the effectness of our optimization pass was size of the generated 
+LLVM IR, in bytes. For many of our tests, we also recorded execution time. This metric was omitted 
+for tests containing infinite loops, as those programs do not halt.
+
+
 I'm thinking our main metric should be file size in bytes, since this is the main 
 purpose of dead code elimination. We can also measure speed as well, but make it clear 
 that it isn't as significant. 
