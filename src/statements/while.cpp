@@ -78,7 +78,12 @@ void ASTStatementWhile::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, A
     // Compile condition and jump to the right block.
     builder.SetInsertPoint(whileLoop);
     auto conditionVal = condition->CompileRValue(builder, func);
-    builder.CreateCondBr(conditionVal, whileLoopBody, whileLoopEnd);
+    if (conditionVal == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0))
+        builder.CreateCondBr(llvm::ConstantInt::get(llvm::Type::getInt1Ty(builder.getContext()), 0), whileLoopBody, whileLoopEnd);
+    else {
+        builder.CreateCondBr(llvm::ConstantInt::get(llvm::Type::getInt1Ty(builder.getContext()), 1), whileLoopBody,
+                             whileLoopEnd);
+    }
 
     // Compile the body. Note that we need to not create a jump if there is a return.
     builder.SetInsertPoint(whileLoopBody);

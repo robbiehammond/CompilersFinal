@@ -23,7 +23,11 @@ void ASTStatementFor::Compile(llvm::Module& mod, llvm::IRBuilder<>& builder, AST
 
     builder.SetInsertPoint(forLoop);
     auto conditionVal = condition->CompileRValue(builder, func);
-    builder.CreateCondBr(conditionVal, forLoopBody, forLoopEnd);
+    if (conditionVal == llvm::ConstantInt::get(llvm::Type::getInt32Ty(builder.getContext()), 0))
+        builder.CreateCondBr(llvm::ConstantInt::get(llvm::Type::getInt1Ty(builder.getContext()), 0), forLoopBody, forLoopEnd);
+    else {
+        builder.CreateCondBr(llvm::ConstantInt::get(llvm::Type::getInt1Ty(builder.getContext()), 1), forLoopBody, forLoopEnd);
+    }
 
     // Compile condition and jump to the right block.
 
