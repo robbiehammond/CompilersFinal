@@ -311,8 +311,18 @@ for tests containing infinite loops, as those programs do not halt.
 
 
 \section{Results}
-We'll use tables, charts, and other stuff to make our basic testing look fancy.
-The better it looks, the more it'll look like we tried.
+Below, you can see space and speed metrics on a small sample of test files. These test files can 
+be found in the implementation submission.
+As can be seen, our optimization pass had a major impact of resulting llvm IR file size, with the 
+optimized file being anywhere from 80\% to 35\% of the size of the original file. 
+
+As can be seen, there was not a big impact on speed, but this is likely because the sample files tested on were so 
+short and simple. If a follow-up report were to be produced, we would have created a more 
+elaborate testing suite to investigate the performance of our optimization pass on more complex 
+pieces of code. The testing suite could include a number of files where the is a large number of loops to be 
+eliminated and conditional branches that can be pruned.
+
+
 
 \begin{table*}
   \caption{File Size Test Results}
@@ -337,18 +347,20 @@ The better it looks, the more it'll look like we tried.
     \toprule
     File & Unoptimized IR Size & Optimized IR Size \\
     \midrule
-    \texttt{{\char'134}author} & 100& Author \\
-    \texttt{{\char'134}table}& 300 & For tables\\
-    \texttt{{\char'134}table*}& 400& For wider tables\\
+    \texttt{$if\_remove\_then.c$}& 0.009s & 0.030s \\
+    \texttt{$if\_remove\_else.c$}&  0.010s & 0.009s \\
+    \texttt{$useless\_for.c$}& 0.009s & 0.009s  \\
+    \texttt{$useless\_while.c$}& 0.012s &  0.009s \\
     \bottomrule
   \end{tabular}
 \end{table*}
 
 \section{Conclusion}
-
-We can talk about our results and talk about how the simple examples could 
-extend to bigger examples and that big code bases need dead code elim. Blah blah blah.
-
+Based on the results, we can confidently say that the removal of obvious dead code 
+can substantially lower the size of the outputted program. In the real world, most 
+dead code isn't so simple and easy to recognize, but our project serves as a 
+proof-of-concept of the usefulness of dead code removal tools and optimizations. 
+[insert a bit more BS here].
 
 \end{document}
 \endinput
