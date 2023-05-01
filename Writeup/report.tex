@@ -308,20 +308,34 @@ LLVM IR, in bytes. For many of our tests, we also recorded execution time. This 
 for tests containing infinite loops, as those programs do not halt.
 
 
-I'm thinking our main metric should be file size in bytes, since this is the main 
-purpose of dead code elimination. We can also measure speed as well, but make it clear 
-that it isn't as significant. 
+
 
 \section{Results}
 We'll use tables, charts, and other stuff to make our basic testing look fancy.
 The better it looks, the more it'll look like we tried.
 
 \begin{table*}
-  \caption{Some Typical Commands}
+  \caption{File Size Test Results}
+  \begin{tabular}{ccl}
+    \toprule
+    File & Unoptimized IR Size & Optimized IR Size \\
+    \midrule
+    \texttt{$if\_remove\_then.c$}& 848& 348 \\
+    \texttt{$if\_remove\_else.c$}&  847& 348\\
+    \texttt{$infinite\_for.c$}& 905& 716 \\
+    \texttt{$useless\_for.c$}& 936& 321  \\
+    \texttt{$infinite\_while.c$}& 888 & 699 \\
+    \texttt{$useless\_while.c$}& 833 & 321  \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}
+  \caption{File Execution Time Test Results}
   \label{tab:commands}
   \begin{tabular}{ccl}
     \toprule
-    Command &A Number & Comments\\
+    File & Unoptimized IR Size & Optimized IR Size \\
     \midrule
     \texttt{{\char'134}author} & 100& Author \\
     \texttt{{\char'134}table}& 300 & For tables\\
