@@ -60,10 +60,6 @@
 %% values in them; it is your responsibility as an author to replace
 %% the commands and values with those provided to you when you
 %% complete the rights form.
-\setcopyright{acmcopyright}
-\copyrightyear{2018}
-\acmYear{2018}
-\acmDOI{XXXXXXX.XXXXXXX}
 
 %% These commands are for a PROCEEDINGS abstract or paper.
 %%\acmConference[Conference acronym 'XX]{Make sure to enter the correct
@@ -75,8 +71,6 @@
 %
 %\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
 %  June 03--05, 2018, Woodstock, NY} 
-\acmPrice{15.00}
-\acmISBN{978-1-4503-XXXX-X/18/06}
 
 
 %%
@@ -161,13 +155,20 @@
 %% other information printed in the page headers. This command allows
 %% the author to define a more concise list
 %% of authors' names for this purpose.
-\renewcommand{\shortauthors}{Trovato and Tobin, et al.}
+\renewcommand{\shortauthors}{Dendi, Hammond and Cassarino, et al.}
 
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  Insert our abstract here.
+Dead code is a big contributor for arbitrarily large 
+program sizes and slow speed, and our project attempts 
+to create an optimization pass that is able to eliminate 
+easy-to-find dead code. This paper outlines some of the 
+high-level details of our implementation of the optimization pass. 
+In addition, this paper outlines the results of the optimiztaion 
+pass when ran on a number of simple test cases to demonstrate 
+its effectiveness. 
 \end{abstract}
 
 
@@ -187,9 +188,6 @@
   %%\label{fig:teaser}
 %%\end{teaserfigure}
 
-\received{20 February 2007}
-\received[revised]{12 March 2009}
-\received[accepted]{5 June 2009}
 
 %%
 %% This command processes the author and affiliation and title
@@ -197,19 +195,19 @@
 \maketitle
 
 \section{Introduction}
-Dead code, when unaddressed, can be a major problem for a piece of software.
+Dead code, when unaddressed, can be a significant problem for software development.
 If not eliminated by the compiler, dead code can make a program 
-larger, especially if there is a substantial amount of it within a codebase. In addition, dead code 
-can make software arbirarily slower, with computational resources being devoted 
+larger, especially if there is a substantial amount within a codebase. In addition, dead code 
+can make software arbitrarily slower, with additional computational resources devoted 
 to declaring unused variables and empty functions. For these reasons, it is imperative that compilers, at 
 a minimum, eliminate chunks of code that are clearly unneeded.
 
 Dead code, as defined in this paper, consists of 
-two related, but distinct types of code. Firstly, code can be considered dead if 
-it is never actually executed at runtime. For example, code inside of the 'else' portion 
+two related but distinct situations. Firstly, code can be considered dead if 
+it is never executed at runtime. For example, code inside the 'else' portion 
 of an if-else block where the condition is always true would be dead. Secondly, a portion of 
 code can be considered dead if the computation performed on those lines are never used anywhere else.
-For example, a function that is never written to or read from can be considered dead. 
+For example, a variable never written to or read from can be regarded as dead. 
 
 Our project focuses on adding basic dead code elimination strategies into the compiler 
 created in the fourth class project. Our goal is to give the compiler support for eliminating
@@ -220,42 +218,42 @@ be able to remove unused variables and other miscellaneous dead code optimizatio
 In this section, we will outline how we implemented the aforementioned code removal functionality.
 
 \subsection{Class and Function Additions}
-In order to implement our optimization pass, a number of additional functions and classes had to be created.
-This section will give an outline of the important modifications, omitting many details and less important additions.
+Several additional functions and classes had to be created to implement our optimization pass.
+This section will outline the essential modifications, omitting many details and less critical additions.
 
 \subsubsection{AST.cpp and function.cpp Changes}
-The creation of the Optimize() function is the most important change to the AST class. The Optimize() function simple 
+The Optimize() function is the most important change to the AST class. The Optimize() function simply 
 calls PerformOptimization() on each function. The PerformOptimization() function calls CanOptimize(), which is a function 
-that both optimizes a statement and returns it's ability to be optimized. This function is described in more detail in the 
+that both optimizes a statement and returns its ability to be optimized. This function is described in more detail in the 
 subsequent sections.
 
 \subsubsection{Statement.h Changes}
-Within the Statement.h file, a number of additional functions have been declared, with the most important being 
-CanOptimize() and HowToOptimize(). The purpose of these functions are relatively self-explanatory. CanOptimize()
-returns if a statement is able to be optimized. For most types of statements, we do not try to optimize them,
+Within the Statement.h file, several additional functions have been declared, with the most important being 
+CanOptimize() and HowToOptimize(). The purpose of these functions is self-explanatory. CanOptimize()
+returns if a statement is able to be optimized. We do not try to optimize most types of statements,
 so the function returns false by default. HowToOptimize() tells the rest of the program what must be done to optimize 
 the statement. HowToOptimize() returns an $Optimization$, which is an enum with values such as $REMOVE\_LOOP$, $REMOVE\_ELSE$, $NO\_OPTIM$,
 and others. 
 
 \subsubsection{Block.cpp Changes}
-The CanOptimize() function within Block.cpp is where much of the important optimization work is done.
-As mentioned above, CanOptimize() is defined with Statement.h and child classes inherit and can override this function.
+The CanOptimize() function within Block.cpp is where much of the vital optimization work is done.
+As mentioned above, CanOptimize() is defined with Statement.h, and child classes inherit and can override this function.
 Though all other subclasses of statement simply return a true or false value from the function, the CanOptimize() function 
 in Block.cpp will modify the state of the containing block class to reflect the optimization changes. Generally speaking, 
-these state changes are the creation and/or deletion of statements within the statements list.
+these state changes are the creation and deletion of statements within the statements list.
 
 \subsection{If Statements}
-There are two cases in which a branch of an if statement will never run. The first case is when the condition 
-is always true, regardless of the state of the program when the if statement is entered. The second case is when 
+There are two cases where a branch of an if statement will never run. The first case is when the condition 
+is always true, regardless of the program's state when the if statement is entered. The second case is when 
 the condition is always false.
 
 \subsubsection{Condition Always True}
-To check if the condition is always true, we get the compiled R value of the condition. If it is 1, then we know that 
+To check if the condition is always true, we get its compiled R-value. If it is 1, then we know 
 the condition must always be true. When this happens, we don't need to have any kind of branching logic in the AST.
 All we must do is generate the code within the else statement and generate the rest of the program like normal. 
 
-\subsubsection{Condition Always True}
-To check if the condition is always false, we get the compiled R value of the condition as in the other case. If it is 0, then we know that 
+\subsubsection{Condition Always Flase}
+To check if the condition is always false, we get the compiled R-value of the condition as in the other case. If it is 0, we know 
 the condition must always be false. Similarly to the case when the condition is always true, all we must do is generate the code within 
 the then statement with no branching logic. 
 
@@ -264,14 +262,14 @@ Just like with the if statements, there are two cases in which a loop may cause 
 is always true, and the second case is when the condition is always false.
 
 \subsubsection{Condition Always True}
-Just like with if statements, we can check if the condition is always true by checking the compiled R value of the condition.
-If it is, then we know that the loop will never terminate, rendering the subsequent code unreachable. To simplify the AST, we can 
-simply get rid of all subsequent statements after the loop. For consistency sake, a return statement is still appended at the end of the loop,
-with the return type matching that of the function. Since the code is unreachable, the value of the return is not important, and arbitrary simple 
+Just like with if statements, we can check if the condition is always true by checking its compiled R-value.
+If it is 1, then we know that the loop will never terminate, rendering the subsequent code unreachable. To simplify the AST, we can 
+simply eliminate all the following statements after the loop. A return statement is still appended at the end of the loop for consistency's sake,
+with the return type matching that of the function. Since the code is unreachable, the return's value is unimportant, and arbitrary
 ones were chosen.
 
 \subsubsection{Condition Always False}
-If the compiled R value of the condition is always false, there is no need to include the loop at all within the AST or LLVM IR. 
+If the compiled R-value of the condition is always false, there is no need to include the loop at all within the AST or LLVM IR. 
 As such, the entire loop is erased within the AST, with the rest of the code being left unaffected.
 
 \subsection{Useless Variables}
@@ -288,38 +286,36 @@ There still is a large number of limitations with our optimization pass. This se
 most critical ones.
 
 \subsubsection{Return/break statements within infinite loops}
-An infinite loop is not really infinite if there exists a reachable jumping statement within it. 
+An infinite loop is not truly infinite if a reachable jumping statement exists within it. 
 Our optimization is not able to recognize this, so as long as the condition is always true, it assumes 
 the following code is unreachable. 
 
 \subsubsection{Resolving more complicated conditions (specifically in regard to the AST)}
 Our optimization pass can only recognize conditions as always being true or false when the condition is either a 
-'0' or '1'. Obviously, this is very much limiting, as most conditions that are always true/false aren't so 
-obvious. However, it is worth noting that code has been written that allows IR to not be generated for slightly less 
+'0' or '1'. Obviously, this is very limiting, as most conditions that are always true/false are more obscure. However, it is worth noting that code has been written that allows IR not to be generated for slightly less 
 trivial conditions, such as when a variable is assigned to 0 and then used in the condition. 
 Since the optimization pass is only supposed to operate on the AST, this logic has been commented out. See for.cpp, while.cpp, and 
 if.cpp for how this is done.
 
 
 \section{Testing Methodology}
-To test our optimization pass, a number of simple tests were created. The main metric 
-we decided to use to determine the effectness of our optimization pass was size of the generated 
+To test our optimization pass, several simple tests were created. The primary metric 
+we decided to use to determine the effectiveness of our optimization pass was the size of the generated 
 LLVM IR, in bytes. For many of our tests, we also recorded execution time. This metric was omitted 
 for tests containing infinite loops, as those programs do not halt.
-
 
 
 
 \section{Results}
 Below, you can see space and speed metrics on a small sample of test files. These test files can 
 be found in the implementation submission.
-As can be seen, our optimization pass had a major impact of resulting llvm IR file size, with the 
-optimized file being anywhere from 80\% to 35\% of the size of the original file. 
+As can be seen, our optimization pass had a major impact on the resulting LLVM IR file size, with the 
+optimized file being anywhere from 80\% to 35\% of the original file's size. 
 
-As can be seen, there was not a big impact on speed, but this is likely because the sample files tested on were so 
-short and simple. If a follow-up report were to be produced, we would have created a more 
+As can be seen, there was not a significant impact on speed, but this is likely because the sample files tested were so 
+short and straightforward. If a follow-up report were to be produced, we would have created a more 
 elaborate testing suite to investigate the performance of our optimization pass on more complex 
-pieces of code. The testing suite could include a number of files where the is a large number of loops to be 
+pieces of code. The testing suite could include many files with a large number of loops to be 
 eliminated and conditional branches that can be pruned.
 
 
@@ -356,11 +352,12 @@ eliminated and conditional branches that can be pruned.
 \end{table*}
 
 \section{Conclusion}
-Based on the results, we can confidently say that the removal of obvious dead code 
+Though our optimization pass has much room for improvement, it is able to recognize 
+and eliminate obvious pieces of dead code, such as unnecessary conditional branches, 
+useless loops, and more. Based on the testing results, we can confidently say that the removal of obvious dead code 
 can substantially lower the size of the outputted program. In the real world, most 
 dead code isn't so simple and easy to recognize, but our project serves as a 
 proof-of-concept of the usefulness of dead code removal tools and optimizations. 
-[insert a bit more BS here].
 
 \end{document}
 \endinput
