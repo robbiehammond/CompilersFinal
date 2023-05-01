@@ -8,6 +8,7 @@ class ASTExpressionAssignment: public ASTExpression
     // Operands to work with.
     std::unique_ptr<ASTExpression> left;
     std::unique_ptr<ASTExpression> right;
+    varUsed = true;
 
 public:
 

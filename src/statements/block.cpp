@@ -56,6 +56,7 @@ bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
     //Ig it's worth knowing that this'll remove any identical adjacent statements,
     //while may not be wanted at times. In the writeup we can mention that we
     //could try to limit this to just assign statements or something like that.
+    if (varUsed == true) {
     for (int i = 0; i < statements.size() - 1; ) {
         if (statements[i]->ToString("") == statements[i + 1]->ToString("")) {
             statements.erase(statements.begin() + i);
@@ -121,6 +122,7 @@ bool ASTStatementBlock::CanOptimize(llvm::Module& mod, llvm::IRBuilder<>& builde
             //statements.push_back(std::unique_ptr<ASTStatement>(new ASTStatementBlock()));
             //std::cout << "remove me"  << std::endl;
         }
+    }
     }
     return false;
 }

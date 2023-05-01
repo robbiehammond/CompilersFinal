@@ -12,6 +12,9 @@ class ASTFunction;
 class ASTStatement
 {
 public:
+
+    //bool to check if var was used
+    bool varUsed = false;
     // Get the return type of the statement.
     // func: Current AST function.
     // Returns: Either a return type if a return statement is definitive, or nullptr if there is none.
