@@ -9,7 +9,4 @@
     <li>Remove code in while loop where the condition always evaluates to false ✅</li>
     <li>Remove code after infinite for loops that will never be reached ✅</li>
     <li>Remove code in for loop where the condition always evaluates to false ✅</li>
-    <li>Remove variables that are declared but never used/given a value ❌</li>
-    <li>Delete empty functions entirely, remove any corresponding calls ❌</li>
-    <li>Clean up code, make optimizations easy to turn on and off❌</li>
 </ul>

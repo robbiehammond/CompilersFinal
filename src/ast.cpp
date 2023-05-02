@@ -102,7 +102,7 @@ void AST::Optimize() {
 void AST::Compile()
 {
 
-    //Optimize();
+    Optimize();
     // All we need to do is compile each function.
     for (auto& func : functionList)
     {

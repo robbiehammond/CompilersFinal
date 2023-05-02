@@ -1,0 +1,4 @@
+The program built and ran in the same way that PG4 could be run.
+
+To turn optimizations off, comment out the Optimize() function call
+in ast.cpp, line 105. To turn them on, uncomment the line.
