@@ -273,8 +273,11 @@ If the compiled R-value of the condition is always false, there is no need to in
 As such, the entire loop is erased within the AST, with the rest of the code being left unaffected.
 
 \subsection{Useless Variables}
-Hopefully we can get this implemented and talk about it. Worst case, we can just talk about things we considered 
-and stuff we tried.
+In the end this feature did not end up working as we intended although several different strategies were looked at to do so. 
+The first was a flagging method where we would try and flag variables they were defined and only compile those that were flagged. 
+We tried to delete variables before compilation that appeared only once in the function. We tried a method where we retroactively 
+parsed the compiled file and removed the non-used variables from it. All of these were either wholly
+unsuccessful or we didn't have the time to figure them out without major problems.  
 
 \subsection{Other Optimizations}
 An additional simple dead code elimination technique is to eliminate adjacent statements.
